@@ -1,6 +1,6 @@
 package com.jstk.data;
 
-public class ProfileInformation {
+public class ProfileInformationTO {
 	
 	
 	
@@ -9,7 +9,7 @@ public class ProfileInformation {
 	private String emailAddress;
 	private String lifeMotto;
 	
-	public ProfileInformation(String firstName, String lastName, String emailAddress, String lifeMotto){
+	public ProfileInformationTO(String firstName, String lastName, String emailAddress, String lifeMotto){
 		this.firstName=firstName;
 		this.lastName=lastName;
 		this.emailAddress=emailAddress;

@@ -2,6 +2,7 @@ package com.jstk.data;
 
 public class GameType {
 
+	private long gameTypeID;
 	private String name;
 	private int minimumNumberOfPlayers;
 	private int maximumNumberOfPlayers;

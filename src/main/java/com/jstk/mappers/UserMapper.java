@@ -1,24 +1,25 @@
 package com.jstk.mappers;
 
-import java.util.HashMap;
 
-
-import com.jstk.data.ProfileInformation;
+import com.jstk.data.ProfileInformationTO;
+import com.jstk.data.User;
 
 public class UserMapper {
 	
 	
 	
 
-	public ProfileInformation getOneUsersProfileInformation(
-			HashMap<Long, ProfileInformation> mapOfAllUsersProfileInformation, Long userID) {
-				
-	
+	public ProfileInformationTO createOneUsersProfileInformation(User searchedUser) {
 		
+		String firstName=searchedUser.getFirstName();
+		String lastName=searchedUser.getLastName();
+		String emailAddress=searchedUser.getEmailAddress();
+		String lifeMotto=searchedUser.getLifeMotto();
 		
-		ProfileInformation usersProfileInformation = mapOfAllUsersProfileInformation.get(userID);
+		ProfileInformationTO profileInformation = new ProfileInformationTO(firstName, lastName, emailAddress,
+				lifeMotto);
 		
-		return usersProfileInformation;
+		return profileInformation;
 
 	}
 

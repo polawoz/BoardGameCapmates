@@ -16,6 +16,26 @@ public class User {
 	private Set<AvailabilityPeriod> availabilityPeriodSet;
 	
 	
+	public String getFirstName() {
+		return firstName;
+	}
+
+
+	public String getLastName() {
+		return lastName;
+	}
+
+
+	public String getEmailAddress() {
+		return emailAddress;
+	}
+
+
+	public String getLifeMotto() {
+		return lifeMotto;
+	}
+
+
 	public long getUserID(){
 		return userID;
 	}

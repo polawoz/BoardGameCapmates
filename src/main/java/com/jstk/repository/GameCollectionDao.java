@@ -21,7 +21,7 @@ public class GameCollectionDao {
 	
 	
 	public Set<GameType> getSystemsGameCollection(){
-		Set<GameType> systemsGameCollection = new HashSet<>(this.systemsGameCollection);
+		
 		return systemsGameCollection;
 	}
 	

@@ -1,7 +1,5 @@
 package com.jstk.services;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,33 +27,54 @@ public class GameCollectionManager {
 
 	}
 
-	public List<GameType> getUsersGameCollection(Long userID) {
+	
+	
+	public List<GameType> findUsersGameCollection(Long userID) {
 
-		HashMap<Long, List<GameType>> mapOfUsersCollectionLists = userDao.findAllUsersCollectionLists();
+		User searchedUser = userDao.findOneUserEntity(userID);
+		List<GameType> usersGameCollection = gameCollectionMapper.copyUsersGameCollection(searchedUser);
 
-		List<GameType> usersGameCollection = new ArrayList<>(
-				gameCollectionMapper.mapSourceCollectionToGetUsersGamesCollection(mapOfUsersCollectionLists, userID));
 
 		return usersGameCollection;
 	}
+	
+	
+
+	
+	
 
 	public void removeGameFromUsersCollection(Long userID, GameType gameFromCollection) {
 
-		getUsersGameCollection(userID).remove(gameFromCollection);
-		//usuwa z tej nowej listy a jak wprowadzic te zmiane do repository?
+		
+		User searchedUser = userDao.findOneUserEntity(userID);
+		searchedUser.getGameCollection().remove(gameFromCollection);
+
 
 	}
 
-	public void addGameToUsersCollection(Long userID, GameType gameTypeToBeAddedToCollection) {
-		// czy moge tutaj nie korzystac z mappera?
+	
+	
+	
+	
+	public void addGameToUsersCollection(Long userID, GameTypeTO gameTypeToBeAddedToCollection) {
+		
+		//sprawdzamy czy juz jest
+		
 		boolean gameTypeIsNotInTheSystemsGameCollection = !gameCollectionDao.getSystemsGameCollection()
 				.contains(gameTypeToBeAddedToCollection);
 
 		if (gameTypeIsNotInTheSystemsGameCollection) {
+			//wczesniej powinna byc jakas walidacja
+			//tu tworzymy encje z pustym gameID
+			
 			gameCollectionDao.addGameTypeToSystemsGameCollection(gameTypeToBeAddedToCollection);
 
 		}
-		getUsersGameCollection(userID).add(gameTypeToBeAddedToCollection);
+		
+		
+		User searchedUser = userDao.findOneUserEntity(userID);
+		searchedUser.getGameCollection().add(gameTypeToBeAddedToCollection);
+		
 
 	}
 

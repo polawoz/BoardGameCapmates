@@ -3,11 +3,13 @@ package com.jstk.repository;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Repository;
 
+import com.jstk.data.GameLogEntity;
 import com.jstk.data.GameType;
-import com.jstk.data.ProfileInformation;
+import com.jstk.data.ProfileInformationTO;
 import com.jstk.data.User;
 
 @Repository
@@ -19,23 +21,25 @@ public class UserDao {
 		this.usersList = new ArrayList<User>();
 	}
 
-	public HashMap<Long, ProfileInformation> findAllUsersProfileInformation() {
+	
 
-		HashMap<Long, ProfileInformation> mapOfAllUsersProfileInformation = new HashMap<>();
-		String firstName=null;
-		String lastName=null;
-		String emailAddress=null;
-		String lifeMotto=null;
-		for (int i = 0; i < usersList.size(); i++) {
+	public User findOneUserEntity(Long userID) {
 
-			ProfileInformation profileInformation = new ProfileInformation(firstName, lastName, emailAddress,
-					lifeMotto);
-			mapOfAllUsersProfileInformation.put(usersList.get(i).getUserID(), profileInformation);
+		User searchedUser = usersList.stream().filter(x -> userID.equals(x.getUserID()))
+				.findAny()
+				.orElse(null);
+		
 
-		}
-
-		return mapOfAllUsersProfileInformation;
+		return searchedUser;
 	}
+
+	
+	
+	
+	
+	
+	
+	
 
 	public HashMap<Long, List<GameType>> findAllUsersCollectionLists() {
 
