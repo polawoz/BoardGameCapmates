@@ -1,7 +1,11 @@
 package com.jstk.mappers;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import com.jstk.data.GameType;
 import com.jstk.data.GameTypeTO;
@@ -32,6 +36,21 @@ public class GameCollectionMapper {
 				gameTypeTO.getMinimumNumberOfPlayers(), gameTypeTO.getMaximumNumberOfPlayers());
 		return gameTypeWithoutGameID;
 	}
+	
+	
+	
+	//mozliwe ze to zbedne
+	public Map<Long, String> createGameIDDictionary(Set<GameType> systemsGameCollection){
+		// czy nie bedzie problemu ze przypisuje do Map nie HashMap?
+		Map<Long, String> gameIDDictionary = new HashMap<>();
+		
+		gameIDDictionary= systemsGameCollection.stream()
+				.collect(Collectors.toMap(GameType::getGameTypeID, GameType::getName));
+		
+		
+		return gameIDDictionary;
+	}
+
 	
 	
 	

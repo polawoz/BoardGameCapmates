@@ -10,7 +10,7 @@ import com.jstk.data.UsersHistoryRecordTO;
 public class UserStatisticsMapper {
 
 	public List<UsersHistoryRecordTO> mapSourceCollection(List<GameLogEntity> listOfOneUsersGamesLogs) {
-
+		//tu bym jednak zmienila zeby UsersHistoryRecordTO nie mial paramatru gameID tylko name
 		List<UsersHistoryRecordTO> historyOfGamesPlayedByOneUser = listOfOneUsersGamesLogs.stream()
 				.map(this::convertEntityToTO).collect(Collectors.toList());
 
@@ -21,12 +21,12 @@ public class UserStatisticsMapper {
 
 	public UsersHistoryRecordTO convertEntityToTO(GameLogEntity entity) {
 		
-		UsersHistoryRecordTO converted=null;
-		//TO DO
-		
-		
+		UsersHistoryRecordTO converted=new UsersHistoryRecordTO(entity.getGameID(), entity.getResult());
+	
 		return converted;
 	}
+	
+	
 
 	
 

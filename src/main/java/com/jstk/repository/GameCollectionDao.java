@@ -26,6 +26,9 @@ public class GameCollectionDao {
 	}
 	
 	
+	
+	
+	
 	public void addGameTypeToSystemsGameCollection(GameType gameToBeAdded){
 		//jak dodawac ID?? jaki typ? rzutowanie?
 		int newGameID = systemsGameCollection.size()+1;
@@ -46,5 +49,8 @@ public class GameCollectionDao {
 		
 		return foundGameType;
 	}
+	
+	
+	
 
 }
