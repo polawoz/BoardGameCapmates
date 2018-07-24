@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jstk.data.GameType;
+import com.jstk.data.GameTypeTO;
 import com.jstk.data.User;
 import com.jstk.mappers.GameCollectionMapper;
 import com.jstk.repository.GameCollectionDao;
@@ -27,54 +28,82 @@ public class GameCollectionManager {
 
 	}
 
-	
-	
 	public List<GameType> findUsersGameCollection(Long userID) {
 
 		User searchedUser = userDao.findOneUserEntity(userID);
 		List<GameType> usersGameCollection = gameCollectionMapper.copyUsersGameCollection(searchedUser);
 
-
 		return usersGameCollection;
 	}
-	
-	
 
-	
-	
+	public void removeGameFromUsersCollection(Long userID, String gameTypeName) {
 
-	public void removeGameFromUsersCollection(Long userID, GameType gameFromCollection) {
+		GameType gameTypeEntityOnlyWithName = gameCollectionMapper
+				.createGameTypeEntityOnlyWithNameParameter(gameTypeName);
 
-		
-		User searchedUser = userDao.findOneUserEntity(userID);
-		searchedUser.getGameCollection().remove(gameFromCollection);
-
+		userDao.removeGameTypeFromOneUsersGameCollection(userID, gameTypeEntityOnlyWithName);
 
 	}
 
-	
-	
-	
-	
+	//zalozenie: w systemie nie ma dwoch gier o takiej samej nazwie
+	public boolean checkIfGameTypeIsInTheSystemsGameCollectionByName(String gameTypeName) {
+
+		GameType gameTypeEntityOnlyWithName = gameCollectionMapper
+				.createGameTypeEntityOnlyWithNameParameter(gameTypeName);
+
+		GameType gameTypeFoundInTheSystemsGameCollection = gameCollectionDao.findGameType(gameTypeEntityOnlyWithName);
+
+		if (gameTypeFoundInTheSystemsGameCollection == null) {
+			return false;
+		}
+
+		return true;
+
+	}
+
+	public boolean checkIfUsersGameCollectionContainsGameTypeWithThatName(Long userID,
+			String gameTypeSearchedInUsersCollectionName) {
+
+		GameType gameTypeEntityOnlyWithName = gameCollectionMapper
+				.createGameTypeEntityOnlyWithNameParameter(gameTypeSearchedInUsersCollectionName);
+
+		GameType searchedGameType = userDao.findGameTypeFromUsersGameCollection(userID, gameTypeEntityOnlyWithName);
+
+		if (searchedGameType != null) {
+			return true;
+		}
+
+		return false;
+
+	}
+
 	public void addGameToUsersCollection(Long userID, GameTypeTO gameTypeToBeAddedToCollection) {
-		
-		//sprawdzamy czy juz jest
-		
-		boolean gameTypeIsNotInTheSystemsGameCollection = !gameCollectionDao.getSystemsGameCollection()
-				.contains(gameTypeToBeAddedToCollection);
+
+		boolean gameTypeIsNotInTheSystemsGameCollection = !checkIfGameTypeIsInTheSystemsGameCollectionByName(
+				gameTypeToBeAddedToCollection.getName());
 
 		if (gameTypeIsNotInTheSystemsGameCollection) {
-			//wczesniej powinna byc jakas walidacja
-			//tu tworzymy encje z pustym gameID
-			
-			gameCollectionDao.addGameTypeToSystemsGameCollection(gameTypeToBeAddedToCollection);
+
+			GameType gameTypeEntityWithoutGameID = gameCollectionMapper
+					.createGameTypeEntityWithoutGameID(gameTypeToBeAddedToCollection);
+
+			gameCollectionDao.addGameTypeToSystemsGameCollection(gameTypeEntityWithoutGameID);
 
 		}
-		
-		
-		User searchedUser = userDao.findOneUserEntity(userID);
-		searchedUser.getGameCollection().add(gameTypeToBeAddedToCollection);
-		
+
+		boolean usersCollectionAlreadyContainsGameTypeWithThatName = checkIfUsersGameCollectionContainsGameTypeWithThatName(
+				userID, gameTypeToBeAddedToCollection.getName());
+
+		if (usersCollectionAlreadyContainsGameTypeWithThatName) {
+			throw new IllegalArgumentException("This users game collection already contains game type with that name!");
+		} else {
+			GameType gameTypeEntityOnlyWithName = gameCollectionMapper
+					.createGameTypeEntityOnlyWithNameParameter(gameTypeToBeAddedToCollection.getName());
+
+			GameType gameTypeFromSystemGameCollection = gameCollectionDao.findGameType(gameTypeEntityOnlyWithName);
+			userDao.findOneUserEntity(userID).getGameCollection().add(gameTypeFromSystemGameCollection);
+
+		}
 
 	}
 

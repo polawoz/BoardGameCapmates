@@ -104,10 +104,17 @@ public class UserProfileManager {
 	
 	
 	
-	public void changePassword(Long userID, String newPassword){
+	public void changePassword(Long userID, String oldPassword, String newPassword){
 		
 		User searchedUser = userDao.findOneUserEntity(userID);
-		searchedUser.setPassoword(newPassword);
+		if(searchedUser.getPassword().equals(oldPassword)){
+			searchedUser.setPassoword(newPassword);
+		}
+		else{
+			throw new IllegalArgumentException("Old password in not correct!");
+		}
+		
+		
 		
 		
 		

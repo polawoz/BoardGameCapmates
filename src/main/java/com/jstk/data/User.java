@@ -40,6 +40,10 @@ public class User {
 		return userID;
 	}
 	
+	public String getPassword(){
+		return password;
+	}
+	
 	
 	public Set<AvailabilityPeriod> getAvailabilityPeriodSet(){
 		return availabilityPeriodSet;
@@ -78,6 +82,8 @@ public class User {
 		return gameCollection;
 		
 	}
+	
+	
 	
 
 }

@@ -14,5 +14,44 @@ public class GameType {
 		
 	}
 	
+	public GameType(String name){
+		this.name=name;
+		
+	}
+
+	public long getGameTypeID() {
+		return gameTypeID;
+	}
+
+	public void setGameTypeID(long gameTypeID) {
+		this.gameTypeID = gameTypeID;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getMinimumNumberOfPlayers() {
+		return minimumNumberOfPlayers;
+	}
+
+	public void setMinimumNumberOfPlayers(int minimumNumberOfPlayers) {
+		this.minimumNumberOfPlayers = minimumNumberOfPlayers;
+	}
+
+	public int getMaximumNumberOfPlayers() {
+		return maximumNumberOfPlayers;
+	}
+
+	public void setMaximumNumberOfPlayers(int maximumNumberOfPlayers) {
+		this.maximumNumberOfPlayers = maximumNumberOfPlayers;
+	}
+	
+	
+	
 	
 }

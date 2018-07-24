@@ -27,9 +27,24 @@ public class GameCollectionDao {
 	
 	
 	public void addGameTypeToSystemsGameCollection(GameType gameToBeAdded){
+		//jak dodawac ID?? jaki typ? rzutowanie?
+		int newGameID = systemsGameCollection.size()+1;
 		
+		gameToBeAdded.setGameTypeID(newGameID);
 		systemsGameCollection.add(gameToBeAdded);
 		
+	}
+
+
+	public GameType findGameType(GameType gameTypeEntityOnlyWithName) {
+
+		GameType foundGameType = systemsGameCollection.stream()
+				.filter(x-> gameTypeEntityOnlyWithName.getName().equals(x.getName()))
+				.findFirst()
+				.orElse(null);
+		
+		
+		return foundGameType;
 	}
 
 }
