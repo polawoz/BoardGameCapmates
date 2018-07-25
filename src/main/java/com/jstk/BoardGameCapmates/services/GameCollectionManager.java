@@ -1,16 +1,16 @@
-package com.jstk.services;
+package com.jstk.BoardGameCapmates.services;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.jstk.data.GameType;
-import com.jstk.data.GameTypeTO;
-import com.jstk.data.User;
-import com.jstk.mappers.GameCollectionMapper;
-import com.jstk.repository.GameCollectionDao;
-import com.jstk.repository.UserDao;
+import com.jstk.BoardGameCapmates.data.GameType;
+import com.jstk.BoardGameCapmates.data.GameTypeTO;
+import com.jstk.BoardGameCapmates.data.User;
+import com.jstk.BoardGameCapmates.mappers.GameCollectionMapper;
+import com.jstk.BoardGameCapmates.repository.GameCollectionDao;
+import com.jstk.BoardGameCapmates.repository.UserDao;
 
 @Service
 public class GameCollectionManager {

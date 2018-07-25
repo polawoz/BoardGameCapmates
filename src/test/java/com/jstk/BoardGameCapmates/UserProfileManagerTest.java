@@ -1,27 +1,28 @@
 package com.jstk.BoardGameCapmates;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
-import com.jstk.data.ProfileInformationTO;
-import com.jstk.data.User;
-import com.jstk.mappers.UserMapper;
-import com.jstk.repository.UserDao;
-import com.jstk.services.UserProfileManager;
+import com.jstk.BoardGameCapmates.data.ProfileInformationTO;
+import com.jstk.BoardGameCapmates.data.User;
+import com.jstk.BoardGameCapmates.mappers.UserMapper;
+import com.jstk.BoardGameCapmates.repository.UserDao;
+import com.jstk.BoardGameCapmates.services.UserProfileManager;
 
-@SpringBootTest
+
+
 public class UserProfileManagerTest {
 
-	@Autowired
+
 	private UserDao userDao;
-	@Autowired
 	private UserMapper userMapper;
+	
+	
 
 	@Test
 	public void shouldReturnEqualProfileInformation() {

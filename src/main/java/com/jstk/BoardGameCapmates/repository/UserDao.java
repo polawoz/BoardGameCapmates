@@ -1,22 +1,29 @@
-package com.jstk.repository;
+package com.jstk.BoardGameCapmates.repository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
-import com.jstk.data.GameType;
-import com.jstk.data.User;
+import com.jstk.BoardGameCapmates.data.GameType;
+import com.jstk.BoardGameCapmates.data.User;
 
 @Repository
 public class UserDao {
 
 	private List<User> usersList;
+	private static final Logger LOGGER= LoggerFactory.getLogger(UserDao.class);
 
 	public UserDao() {
 		this.usersList = new ArrayList<User>();
+
+
 	}
+	
+	
 	
 	//pomocnicze do testow
 	public void replaceUsersList(List<User> previouslyCreatedList){
@@ -28,6 +35,9 @@ public class UserDao {
 	public User findOneUserEntity(Long userID) {
 
 		User searchedUser = usersList.stream().filter(x -> userID.equals(x.getUserID())).findAny().orElse(null);
+		
+		
+		LOGGER.info ("All books were found repo") ;
 
 		return searchedUser;
 	}

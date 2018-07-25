@@ -1,6 +1,6 @@
-package com.jstk.data;
+package com.jstk.BoardGameCapmates.data;
 
-import com.jstk.enums.DayOfTheWeek;
+import com.jstk.BoardGameCapmates.enums.DayOfTheWeek;
 
 public class AvailabilityPeriod {
 	

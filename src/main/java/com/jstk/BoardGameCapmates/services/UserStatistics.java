@@ -1,4 +1,4 @@
-package com.jstk.services;
+package com.jstk.BoardGameCapmates.services;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,13 +10,13 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.jstk.data.GameLogEntity;
-import com.jstk.data.RankingRecordTO;
-import com.jstk.data.UsersHistoryRecordTO;
-import com.jstk.enums.StatisticsType;
-import com.jstk.mappers.UserStatisticsMapper;
-import com.jstk.repository.GameCollectionDao;
-import com.jstk.repository.GameHistoryDao;
+import com.jstk.BoardGameCapmates.data.GameLogEntity;
+import com.jstk.BoardGameCapmates.data.RankingRecordTO;
+import com.jstk.BoardGameCapmates.data.UsersHistoryRecordTO;
+import com.jstk.BoardGameCapmates.enums.StatisticsType;
+import com.jstk.BoardGameCapmates.mappers.UserStatisticsMapper;
+import com.jstk.BoardGameCapmates.repository.GameCollectionDao;
+import com.jstk.BoardGameCapmates.repository.GameHistoryDao;
 
 @Service
 public class UserStatistics {
@@ -153,7 +153,7 @@ public List<UsersHistoryRecordTO> getHistoryOfGamesPlayed(Long userID){
 		
 		
 		
-		return rankingRecord;
+		return null;
 	}
 	
 	public int getRankingLevel(Long userID, String gameTypeName) {

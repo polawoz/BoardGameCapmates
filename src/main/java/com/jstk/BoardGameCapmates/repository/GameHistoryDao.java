@@ -1,4 +1,4 @@
-package com.jstk.repository;
+package com.jstk.BoardGameCapmates.repository;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Repository;
 
-import com.jstk.data.GameLogEntity;
+import com.jstk.BoardGameCapmates.data.GameLogEntity;
 
 @Repository
 public class GameHistoryDao {
@@ -19,7 +19,7 @@ public class GameHistoryDao {
 
 		this.listOfGameLogs = new ArrayList<>();
 
-		// this.listOfGameLogs.add(new GameLogEntry(0L, 0L, 1));
+	
 
 	}
 

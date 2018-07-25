@@ -1,9 +1,12 @@
-package com.jstk.mappers;
+package com.jstk.BoardGameCapmates.mappers;
 
 
-import com.jstk.data.ProfileInformationTO;
-import com.jstk.data.User;
+import org.springframework.stereotype.Component;
 
+import com.jstk.BoardGameCapmates.data.ProfileInformationTO;
+import com.jstk.BoardGameCapmates.data.User;
+
+@Component
 public class UserMapper {
 	
 	

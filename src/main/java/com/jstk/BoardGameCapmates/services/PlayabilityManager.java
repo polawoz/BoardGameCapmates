@@ -1,33 +1,33 @@
-package com.jstk.services;
+package com.jstk.BoardGameCapmates.services;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.jstk.data.AvailabilityPeriod;
-import com.jstk.data.User;
-import com.jstk.enums.DayOfTheWeek;
+import com.jstk.BoardGameCapmates.data.AvailabilityPeriod;
+import com.jstk.BoardGameCapmates.data.User;
+import com.jstk.BoardGameCapmates.enums.DayOfTheWeek;
 
 public class PlayabilityManager {
 	
-	private final PlayabilityMapper playabilityMapper;
-	private final UserDao userDao;
+	//private final PlayabilityMapper playabilityMapper;
+	//private final UserDao userDao;
 	//private final 
 	
 	
 	
 	
-	public List<AvailabilityPeriod> findUsersAvailabilityPeriodList(Long userID){
+	//public List<AvailabilityPeriod> findUsersAvailabilityPeriodList(Long userID){
 		
 		
 		
 		
-	}
+	//}
 	
 	
 	
 	public void addAvailabilityPeriod(Long userID){
 		
-		user.getAvailabilityPeriodSet().add(new AvailabilityPeriod(DayOfTheWeek.MONDAY, "15:30", "18:30"));
+	//	user.getAvailabilityPeriodSet().add(new AvailabilityPeriod(DayOfTheWeek.MONDAY, "15:30", "18:30"));
 		
 	}
 	
@@ -41,7 +41,7 @@ public class PlayabilityManager {
 		
 		
 		AvailabilityPeriod availabilityPeriod = new AvailabilityPeriod(DayOfTheWeek.MONDAY, "15:30", "18:30");
-		user.getAvailabilityPeriodSet().remove(availabilityPeriod);
+	//	user.getAvailabilityPeriodSet().remove(availabilityPeriod);
 		// co z tym komentarzem
 		
 		

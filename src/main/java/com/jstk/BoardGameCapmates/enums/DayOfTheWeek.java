@@ -1,4 +1,4 @@
-package com.jstk.enums;
+package com.jstk.BoardGameCapmates.enums;
 
 public enum DayOfTheWeek {
 	

@@ -1,12 +1,15 @@
-package com.jstk.mappers;
+package com.jstk.BoardGameCapmates.mappers;
 
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.jstk.data.GameLogEntity;
-import com.jstk.data.UsersHistoryRecordTO;
+import org.springframework.stereotype.Component;
 
+import com.jstk.BoardGameCapmates.data.GameLogEntity;
+import com.jstk.BoardGameCapmates.data.UsersHistoryRecordTO;
+
+@Component
 public class UserStatisticsMapper {
 
 	public List<UsersHistoryRecordTO> mapSourceCollection(List<GameLogEntity> listOfOneUsersGamesLogs) {

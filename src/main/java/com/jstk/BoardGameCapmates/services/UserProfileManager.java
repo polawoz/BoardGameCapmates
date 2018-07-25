@@ -1,13 +1,13 @@
-package com.jstk.services;
+package com.jstk.BoardGameCapmates.services;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.jstk.data.ProfileInformationTO;
-import com.jstk.data.User;
-import com.jstk.mappers.UserMapper;
-import com.jstk.repository.UserDao;
+import com.jstk.BoardGameCapmates.data.ProfileInformationTO;
+import com.jstk.BoardGameCapmates.data.User;
+import com.jstk.BoardGameCapmates.mappers.UserMapper;
+import com.jstk.BoardGameCapmates.repository.UserDao;
 
 @Service
 public class UserProfileManager {

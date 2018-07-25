@@ -1,4 +1,4 @@
-package com.jstk.data;
+package com.jstk.BoardGameCapmates.data;
 
 import java.util.List;
 

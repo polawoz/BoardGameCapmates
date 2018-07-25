@@ -1,4 +1,4 @@
-package com.jstk.mappers;
+package com.jstk.BoardGameCapmates.mappers;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,10 +7,13 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import com.jstk.data.GameType;
-import com.jstk.data.GameTypeTO;
-import com.jstk.data.User;
+import org.springframework.stereotype.Component;
 
+import com.jstk.BoardGameCapmates.data.GameType;
+import com.jstk.BoardGameCapmates.data.GameTypeTO;
+import com.jstk.BoardGameCapmates.data.User;
+
+@Component
 public class GameCollectionMapper {
 
 
