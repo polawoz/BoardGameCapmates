@@ -17,6 +17,13 @@ public class UserDao {
 	public UserDao() {
 		this.usersList = new ArrayList<User>();
 	}
+	
+	//pomocnicze do testow
+	public void replaceUsersList(List<User> previouslyCreatedList){
+		this.usersList=previouslyCreatedList;
+		
+	}
+	
 
 	public User findOneUserEntity(Long userID) {
 

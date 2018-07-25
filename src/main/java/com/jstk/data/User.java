@@ -1,7 +1,8 @@
 package com.jstk.data;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
+
 
 public class User {
 	
@@ -13,14 +14,27 @@ public class User {
 	private String password;
 	//to do repozytorium
 	private List<GameType> gameCollection;
-	private Set<AvailabilityPeriod> availabilityPeriodSet;
+	private List<AvailabilityPeriod> availabilityPeriodList;
 	
+	//pomocniczo do testow
+	public User(Long userID, String firstName, String lastName, String emailAddress, String lifeMotto, String password) {
+		this.userID = userID;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.emailAddress = emailAddress;
+		this.lifeMotto = lifeMotto;
+		this.password = password;
+		this.gameCollection=new ArrayList<>();
+		this.availabilityPeriodList = new ArrayList<>();
+	}
+
+
 	
 	public String getFirstName() {
 		return firstName;
 	}
-
-
+	
+	
 	public String getLastName() {
 		return lastName;
 	}
@@ -45,8 +59,8 @@ public class User {
 	}
 	
 	
-	public Set<AvailabilityPeriod> getAvailabilityPeriodSet(){
-		return availabilityPeriodSet;
+	public List<AvailabilityPeriod> getAvailabilityPeriodList(){
+		return availabilityPeriodList;
 	}
 	
 	
@@ -83,6 +97,11 @@ public class User {
 		
 	}
 	
+	//metoda do testow
+	public void setGameCollection(List<GameType> newGameCollection){
+		this.gameCollection=newGameCollection;
+		
+	}
 	
 	
 

@@ -64,6 +64,8 @@ public class GameCollectionManager {
 	public boolean checkIfUsersGameCollectionContainsGameTypeWithThatName(Long userID,
 			String gameTypeSearchedInUsersCollectionName) {
 
+		//optional isPresent()
+		
 		GameType gameTypeEntityOnlyWithName = gameCollectionMapper
 				.createGameTypeEntityOnlyWithNameParameter(gameTypeSearchedInUsersCollectionName);
 

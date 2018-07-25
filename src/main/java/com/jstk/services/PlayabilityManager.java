@@ -9,6 +9,20 @@ import com.jstk.enums.DayOfTheWeek;
 
 public class PlayabilityManager {
 	
+	private final PlayabilityMapper playabilityMapper;
+	private final UserDao userDao;
+	//private final 
+	
+	
+	
+	
+	public List<AvailabilityPeriod> findUsersAvailabilityPeriodList(Long userID){
+		
+		
+		
+		
+	}
+	
 	
 	
 	public void addAvailabilityPeriod(Long userID){

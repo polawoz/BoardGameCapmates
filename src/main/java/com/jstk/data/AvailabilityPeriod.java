@@ -4,9 +4,13 @@ import com.jstk.enums.DayOfTheWeek;
 
 public class AvailabilityPeriod {
 	
+	//userID
 	private DayOfTheWeek dayOfTheWeek;
 	private int periodBegginingMinute;
 	private int periodEndingMinute;
+	private String status;
+	private String comment;
+	
 	
 	
 	public AvailabilityPeriod(DayOfTheWeek dayOfTheWeek, String beggingingTime, String endingTime){

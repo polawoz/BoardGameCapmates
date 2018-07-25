@@ -16,6 +16,22 @@ public class ProfileInformationTO {
 		this.lifeMotto=lifeMotto;
 		
 	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public String getEmailAddress() {
+		return emailAddress;
+	}
+
+	public String getLifeMotto() {
+		return lifeMotto;
+	}
 	
 
 }

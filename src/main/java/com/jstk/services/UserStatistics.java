@@ -2,7 +2,9 @@ package com.jstk.services;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -135,9 +137,21 @@ public List<UsersHistoryRecordTO> getHistoryOfGamesPlayed(Long userID){
 		
 		
 		
+		Map<Long, Integer> sortedMap =
+		        gameTypeRankingUnsortedMap.entrySet().stream()
+		                .sorted(Map.Entry.comparingByValue())
+		                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
+		                        (e1, e2) -> e2, LinkedHashMap::new));
 		
 		
-		List<RankingRecordTO> rankingRecord= new ArrayList<>();
+		
+		//przekazuje ja do mappera, ktory potworzy obiekty RankingRecordTO i zwroci ich liste
+		//
+		
+		
+		
+		
+		
 		
 		return rankingRecord;
 	}
@@ -147,9 +161,10 @@ public List<UsersHistoryRecordTO> getHistoryOfGamesPlayed(Long userID){
 		int rankingLevel = 0;
 		
 		
+		
 		// tutaj pobrac utworzona wczesniej liste rankingowa i znalezc na ktorej
 		// pozycji jest ten User
-
+		//uwzglednic ze gracz wgl w to nie gral
 		return rankingLevel;
 	}
 
