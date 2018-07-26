@@ -15,6 +15,8 @@ public class GameHistoryDao {
 
 	private List<GameLogEntity> listOfGameLogs;
 
+	
+	
 	public GameHistoryDao() {
 
 		this.listOfGameLogs = new ArrayList<>();

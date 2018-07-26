@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,16 @@ public class GameCollectionManagerSpringUnitTest {
 	@Autowired
 	private GameCollectionDao gameCollectionDao;
 
+	
+	@Before
+	public void reset(){
+	
+		
+		//wszystkie metody wpisujace w listy DAOsow
+		
+	}
+	
+	
 	@Configuration
 	static class GameCollectionManagerTestContextConfiguration {
 		

@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,6 @@ import com.jstk.BoardGameCapmates.mappers.UserMapper;
 import com.jstk.BoardGameCapmates.repository.UserDao;
 import com.jstk.BoardGameCapmates.services.UserProfileManager;
 
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration
 public class UserProfileManagerSpringUnitTest {
@@ -31,57 +31,49 @@ public class UserProfileManagerSpringUnitTest {
 	private UserMapper userMapper;
 	@Autowired
 	private UserProfileManager userProfileManager;
-	
-	
-	//to mi lapie do kazdej klasy testowej
+
+	@Before
+	public void reset() {
+
+		List<User> listOfUsers = new ArrayList<>();
+		listOfUsers.add(
+				new User(1L, "Jan", "Nowak", "jan.nowak@skrzynka.com", "Najzyciowsze zyciowe motto", "hasloNowaka11"));
+		listOfUsers.add(new User(2L, "Jacek", "Staszek", "jacek.stasz@skrzynka.com",
+				"W zyciu nie kieruje sie zyciowymi mottami", "hasloStaszka22"));
+		listOfUsers.add(new User(3L, "Jan", "Kowalski", "jan.kowalski@skrzynka.com", "Zycie jest nowela",
+				"hasloKowalskiego33"));
+
+		userDao.replaceUsersList(listOfUsers);
+
+	}
+
 	@Configuration
 	static class UserProfileManagerTestContextConfiguration {
 		@Bean
 		public UserDao userDao() {
-			
-			UserDao userDao = new UserDao();
-			List<User> listOfUsers = new ArrayList<>();
-			listOfUsers.add(
-					new User(1L, "Jan", "Nowak", "jan.nowak@skrzynka.com", "Najzyciowsze zyciowe motto", "hasloNowaka11"));
-			listOfUsers.add(new User(2L, "Jacek", "Staszek", "jacek.stasz@skrzynka.com",
-					"W zyciu nie kieruje sie zyciowymi mottami", "hasloStaszka22"));
-			listOfUsers.add(new User(3L, "Jan", "Kowalski", "jan.kowalski@skrzynka.com", "Zycie jest nowela",
-					"hasloKowalskiego33"));
-			
-			userDao.replaceUsersList(listOfUsers);
-			
-			
-			return userDao;
+
+			return new UserDao();
 		}
-		
-		
-		
+
 		@Bean
-		public UserMapper userMapper(){
-			
-			
+		public UserMapper userMapper() {
+
 			return new UserMapper();
 		}
-		
-		
-		@Bean
-		public UserProfileManager userProfileManager(){
-			return new UserProfileManager(userMapper(), userDao());
-			
-			
-		}
-	
-	}
 
-	
-	
-	
+		@Bean
+		public UserProfileManager userProfileManager() {
+			return new UserProfileManager(userMapper(), userDao());
+
+		}
+
+	}
 
 	@Test
 	public void shouldReturnEqualProfileInformation() {
 
 		// given
-		
+
 		// when
 		ProfileInformationTO result = userProfileManager.findUserProfileInformation(3L);
 
@@ -97,7 +89,6 @@ public class UserProfileManagerSpringUnitTest {
 	public void shouldReturnProfileInformationWithChangedFirstName() {
 
 		// given
-
 
 		// when
 		ProfileInformationTO result = userProfileManager.changeFirstName(2L, "Jacunio");
@@ -115,7 +106,6 @@ public class UserProfileManagerSpringUnitTest {
 
 		// given
 
-
 		// when
 		ProfileInformationTO result = userProfileManager.changeLastName(2L, "Stanislawski");
 
@@ -131,7 +121,6 @@ public class UserProfileManagerSpringUnitTest {
 	public void shouldReturnProfileInformationWithChangedEMailAddress() {
 
 		// given
-
 
 		// when
 		ProfileInformationTO result = userProfileManager.changeEMail(3L, "jan.kiedyskowalski@skrzynka.com");
@@ -149,7 +138,6 @@ public class UserProfileManagerSpringUnitTest {
 
 		// given
 
-
 		// when
 		ProfileInformationTO result = userProfileManager.changeLifeMotto(1L, "Najzyciowsze zyciowe motto zycia");
 
@@ -160,44 +148,40 @@ public class UserProfileManagerSpringUnitTest {
 		assertEquals("Najzyciowsze zyciowe motto zycia", result.getLifeMotto());
 
 	}
+
 	@Test
 	public void shouldChangeUsersPassword() {
 
 		// given
 
-
-		//when
+		// when
 		userProfileManager.changePassword(2L, "hasloStaszka22", "hasloStanislawa22");
-		
-		
-		//then
+
+		// then
 		User userWhoChangedHisPassoword = userDao.findOneUserEntity(2L);
-		
+
 		assertEquals("hasloStanislawa22", userWhoChangedHisPassoword.getPassword());
-	
+
 	}
-	
+
 	@Test
 	public void shouldThrowIllegalArgumentExceptionWhenUserTriesToChangeHisPassword() {
 
 		// given
 
-
-		//when
+		// when
 		boolean exceptionThrown = false;
-		try{
-		userProfileManager.changePassword(2L, "hasloStacha22", "hasloStanislawa22");
+		try {
+			userProfileManager.changePassword(2L, "hasloStacha22", "hasloStanislawa22");
+		} catch (IllegalArgumentException e) {
+			exceptionThrown = true;
 		}
-		catch(IllegalArgumentException e){
-			exceptionThrown=true;
-		}
-		
-		//then
+
+		// then
 		assertTrue(exceptionThrown);
 		User userWhoChangedHisPassoword = userDao.findOneUserEntity(2L);
 		assertEquals("hasloStaszka22", userWhoChangedHisPassoword.getPassword());
-	
+
 	}
-	
 
 }

@@ -12,7 +12,6 @@ public class User {
 	private String emailAddress;
 	private String lifeMotto;
 	private String password;
-	//to do repozytorium
 	private List<GameType> gameCollection;
 	private List<AvailabilityPeriod> availabilityPeriodList;
 	
