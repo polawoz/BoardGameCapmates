@@ -1,20 +1,18 @@
 package com.jstk.BoardGameCapmates.data;
 
 public class ProfileInformationTO {
-	
-	
-	
+
 	private String firstName;
 	private String lastName;
 	private String emailAddress;
 	private String lifeMotto;
-	
-	public ProfileInformationTO(String firstName, String lastName, String emailAddress, String lifeMotto){
-		this.firstName=firstName;
-		this.lastName=lastName;
-		this.emailAddress=emailAddress;
-		this.lifeMotto=lifeMotto;
-		
+
+	public ProfileInformationTO(String firstName, String lastName, String emailAddress, String lifeMotto) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.emailAddress = emailAddress;
+		this.lifeMotto = lifeMotto;
+
 	}
 
 	public String getFirstName() {
@@ -32,6 +30,5 @@ public class ProfileInformationTO {
 	public String getLifeMotto() {
 		return lifeMotto;
 	}
-	
 
 }

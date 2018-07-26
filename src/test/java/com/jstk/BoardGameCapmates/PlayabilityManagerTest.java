@@ -59,10 +59,12 @@ public class PlayabilityManagerTest {
 
 		userDao.replaceUsersList(listOfUsers);
 		
-		
-		
 		cancelledAvailabilityPeriodsDao.resetRepo();
+		AvailabilityPeriod cancelledAvailabilityPeriod = new AvailabilityPeriod(1L, DayOfTheWeek.MONDAY, new Time(15,30), new Time(16,30));
+		cancelledAvailabilityPeriod.setComment("Ide do denstysty");
+		cancelledAvailabilityPeriodsDao.getListOfCancelledAvailabilityPeriods().add(cancelledAvailabilityPeriod);
 		
+	
 		
 		
 	}
@@ -102,6 +104,26 @@ public class PlayabilityManagerTest {
 	}
 	
 	
+	@Test
+	public void shouldFindUsersCancelledAvailabilityPeriodList(){
+		
+		
+		//when
+		List<AvailabilityPeriod> usersCancelledAvailabilityPeriodList =
+				playabilityManager.findUsersCancelledAvailabilityPeriodList(1L);
+		
+		//then
+		assertTrue(usersCancelledAvailabilityPeriodList.size()==1);
+		assertTrue(usersCancelledAvailabilityPeriodList.get(0).getComment().equals("Ide do denstysty"));
+		
+		
+	}
+	
+	
+	
+	
+	
+	
 	
 	
 	@Test
@@ -119,7 +141,15 @@ public class PlayabilityManagerTest {
 		
 		//then
 		assertTrue(challengesList.size()==2);
-		
+		assertTrue(challengesList.get(0).getChallengerUserID()==1L);
+		assertTrue(challengesList.get(1).getChallengerUserID()==1L);
+		assertTrue(challengesList.get(0).getOpponentUserID()==2L);
+		assertTrue(challengesList.get(1).getOpponentUserID()==3L);
+		assertTrue(challengesList.get(0).getBeginingTime().getHour()==15 &&
+				challengesList.get(0).getBeginingTime().getMinute()==30);
+		assertTrue(challengesList.get(0).getEndingTime().getHour()==16 &&
+				challengesList.get(0).getEndingTime().getMinute()==30);
+
 		
 		
 		

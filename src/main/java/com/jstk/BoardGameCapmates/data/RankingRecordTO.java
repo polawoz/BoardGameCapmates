@@ -1,11 +1,11 @@
 package com.jstk.BoardGameCapmates.data;
 
 public class RankingRecordTO {
-	
+
 	private Long userID;
 	private int pointsSum;
 	private int rankingSpot;
-	
+
 	public RankingRecordTO(Long userID, int pointsSum, int rankingSpot) {
 		this.userID = userID;
 		this.pointsSum = pointsSum;
@@ -35,7 +35,5 @@ public class RankingRecordTO {
 	public void setRankingSpot(int rankingSpot) {
 		this.rankingSpot = rankingSpot;
 	}
-	
-	
 
 }

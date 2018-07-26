@@ -23,7 +23,17 @@ public class PlayabilityMapper {
 	public List<AvailabilityPeriod> createUsersCancelledAvailabilityPeriodsList(
 			List<AvailabilityPeriod> usersAvailabilityPeriodsList) {
 
-		List<AvailabilityPeriod> copyOfUsersAvailabilityPeriodList = new ArrayList<>(usersAvailabilityPeriodsList);
+		List<AvailabilityPeriod> copyOfUsersAvailabilityPeriodList = new ArrayList<>();
+
+		for (int i = 0; i < usersAvailabilityPeriodsList.size(); i++) {
+			AvailabilityPeriod availabilityPeriodEntity = usersAvailabilityPeriodsList.get(i);
+			AvailabilityPeriod availabilityPeriodTO = new AvailabilityPeriod(availabilityPeriodEntity.getUserID(),
+					availabilityPeriodEntity.getDayOfTheWeek(), availabilityPeriodEntity.getBeginningTime(),
+					availabilityPeriodEntity.getEndingTime());
+			availabilityPeriodTO.setComment(availabilityPeriodEntity.getComment());
+			copyOfUsersAvailabilityPeriodList.add(availabilityPeriodTO);
+
+		}
 
 		return copyOfUsersAvailabilityPeriodList;
 

@@ -2,6 +2,7 @@ package com.jstk.BoardGameCapmates.repositoryTests;
 
 import static org.junit.Assert.*;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,25 +21,31 @@ public class GameCollectionDaoTest {
 	@Autowired
 	private GameCollectionDao gameCollectionDao;
 
+	@Before
+	public void reset() {
+
+		
+		gameCollectionDao.reset();
+		
+		GameType gameType = new GameType("Chinczyk", 2, 4);
+		gameType.setGameTypeID(1L);
+		gameCollectionDao.getSystemsGameCollection().add(gameType);
+		GameType secondGameType = new GameType("Monopoly", 2, 4);
+		secondGameType.setGameTypeID(2L);
+		gameCollectionDao.getSystemsGameCollection().add(secondGameType);
+		GameType thirdGameType = new GameType("Eurobiznes", 2, 4);
+		thirdGameType.setGameTypeID(3L);
+		gameCollectionDao.getSystemsGameCollection().add(thirdGameType);
+
+	}
+
 	@Configuration
 	static class GameCollectionDaoTestConfiguration {
 
 		@Bean
 		public GameCollectionDao gameCollectionDao() {
 
-			GameCollectionDao gameCollectionDao = new GameCollectionDao();
-
-			GameType gameType = new GameType("Chinczyk", 2, 4);
-			gameType.setGameTypeID(1L);
-			gameCollectionDao.getSystemsGameCollection().add(gameType);
-			GameType secondGameType = new GameType("Monopoly", 2, 4);
-			secondGameType.setGameTypeID(2L);
-			gameCollectionDao.getSystemsGameCollection().add(secondGameType);
-			GameType thirdGameType = new GameType("Eurobiznes", 2, 4);
-			thirdGameType.setGameTypeID(3L);
-			gameCollectionDao.getSystemsGameCollection().add(thirdGameType);
-
-			return gameCollectionDao;
+			return new GameCollectionDao();
 
 		}
 
@@ -72,10 +79,5 @@ public class GameCollectionDaoTest {
 		assertTrue(gameTypeEntityOnlyWithName.getName().equals(gameTypeFound.getName()));
 
 	}
-	
-	
-	
-	
-	
 
 }

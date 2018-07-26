@@ -10,46 +10,45 @@ import com.jstk.BoardGameCapmates.data.AvailabilityPeriod;
 
 @Repository
 public class CancelledAvailabilityPeriodsDao {
-	
+
 	List<AvailabilityPeriod> listOfCancelledAvailabilityPeriods;
-	
-	public CancelledAvailabilityPeriodsDao(){
-		this.listOfCancelledAvailabilityPeriods=new ArrayList<>();
-		
+
+	public CancelledAvailabilityPeriodsDao() {
+		this.listOfCancelledAvailabilityPeriods = new ArrayList<>();
+
 	}
-	
-	
-	
-	public void addACancelledAvailabilityPeriod(AvailabilityPeriod cancelledAvailabilityPeriod){
-		
+
+	public List<AvailabilityPeriod> getListOfCancelledAvailabilityPeriods() {
+		return listOfCancelledAvailabilityPeriods;
+	}
+
+	public void setListOfCancelledAvailabilityPeriods(List<AvailabilityPeriod> listOfCancelledAvailabilityPeriods) {
+		this.listOfCancelledAvailabilityPeriods = listOfCancelledAvailabilityPeriods;
+	}
+
+	public void addACancelledAvailabilityPeriod(AvailabilityPeriod cancelledAvailabilityPeriod) {
+
 		listOfCancelledAvailabilityPeriods.add(cancelledAvailabilityPeriod);
-		
+
 	}
-	
-	
-	public List<AvailabilityPeriod> getUsersCancelledAvailabilityPeriodsList(Long userID){
-		
+
+	public List<AvailabilityPeriod> getUsersCancelledAvailabilityPeriodsList(Long userID) {
+
 		List<AvailabilityPeriod> searchedUsersAvailabilityPeriodsList = new ArrayList<>();
-				
+
 		searchedUsersAvailabilityPeriodsList = listOfCancelledAvailabilityPeriods.stream()
-				.filter(x-> userID.equals(x.getUserID())).collect(Collectors.toList());
-		
+				.filter(x -> userID.equals(x.getUserID())).collect(Collectors.toList());
+
 		return searchedUsersAvailabilityPeriodsList;
-		
+
 	}
-	
-	
-	
-	public void resetRepo(){
+
+	public void resetRepo() {
 		listOfCancelledAvailabilityPeriods.clear();
 	}
-	
-	
-	public void removeCancelledAvailabillityPeriodFrom3MonthsAgo(){
-		
-		
+
+	public void removeCancelledAvailabillityPeriodFrom3MonthsAgo() {
+
 	}
-	
-	
 
 }

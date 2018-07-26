@@ -41,7 +41,38 @@ public class GameCollectionManagerSpringUnitTest {
 	public void reset(){
 	
 		
-		//wszystkie metody wpisujace w listy DAOsow
+		
+		
+		gameCollectionDao.reset();
+		GameType gameType = new GameType("Chinczyk", 2, 4);
+		gameType.setGameTypeID(1L);
+		gameCollectionDao.getSystemsGameCollection().add(gameType);
+		GameType secondGameType = new GameType("Monopoly", 2, 4);
+		secondGameType.setGameTypeID(2L);
+		gameCollectionDao.getSystemsGameCollection().add(secondGameType);
+		GameType thirdGameType = new GameType("Eurobiznes", 2, 4);
+		thirdGameType.setGameTypeID(3L);
+		gameCollectionDao.getSystemsGameCollection().add(thirdGameType);
+		
+		
+
+		List<User> listOfUsers = new ArrayList<>();
+		listOfUsers.add(new User(1L, "Jan", "Nowak", "jan.nowak@skrzynka.com", "Najzyciowsze zyciowe motto",
+				"hasloNowaka11"));
+		listOfUsers.add(new User(2L, "Jacek", "Staszek", "jacek.stasz@skrzynka.com",
+				"W zyciu nie kieruje sie zyciowymi mottami", "hasloStaszka22"));
+		listOfUsers.add(new User(3L, "Jan", "Kowalski", "jan.kowalski@skrzynka.com", "Zycie jest nowela",
+				"hasloKowalskiego33"));
+
+		userDao.replaceUsersList(listOfUsers);
+		
+		userDao.findOneUserEntity(3L).getGameCollection().add(gameCollectionDao.findGameType(new GameType("Chinczyk")));
+		userDao.findOneUserEntity(3L).getGameCollection().add(gameCollectionDao.findGameType(new GameType("Monopoly")));
+		
+		
+		
+		
+		
 		
 	}
 	
@@ -58,20 +89,8 @@ public class GameCollectionManagerSpringUnitTest {
 		@Bean
 		public GameCollectionDao gameCollectionDao() {
 
-			GameCollectionDao gameCollectionDao = new GameCollectionDao();
-			
-			GameType gameType = new GameType("Chinczyk", 2, 4);
-			gameType.setGameTypeID(1L);
-			gameCollectionDao.getSystemsGameCollection().add(gameType);
-			GameType secondGameType = new GameType("Monopoly", 2, 4);
-			secondGameType.setGameTypeID(2L);
-			gameCollectionDao.getSystemsGameCollection().add(secondGameType);
-			GameType thirdGameType = new GameType("Eurobiznes", 2, 4);
-			thirdGameType.setGameTypeID(3L);
-			gameCollectionDao.getSystemsGameCollection().add(thirdGameType);
 
-
-			return gameCollectionDao;
+			return new GameCollectionDao();
 		}
 		
 		
@@ -79,22 +98,10 @@ public class GameCollectionManagerSpringUnitTest {
 		@Bean
 		public UserDao userDao() {
 
-			UserDao userDao = new UserDao();
-			List<User> listOfUsers = new ArrayList<>();
-			listOfUsers.add(new User(1L, "Jan", "Nowak", "jan.nowak@skrzynka.com", "Najzyciowsze zyciowe motto",
-					"hasloNowaka11"));
-			listOfUsers.add(new User(2L, "Jacek", "Staszek", "jacek.stasz@skrzynka.com",
-					"W zyciu nie kieruje sie zyciowymi mottami", "hasloStaszka22"));
-			listOfUsers.add(new User(3L, "Jan", "Kowalski", "jan.kowalski@skrzynka.com", "Zycie jest nowela",
-					"hasloKowalskiego33"));
-
-			userDao.replaceUsersList(listOfUsers);
-			
-			userDao.findOneUserEntity(3L).getGameCollection().add(gameCollectionDao().findGameType(new GameType("Chinczyk")));
-			userDao.findOneUserEntity(3L).getGameCollection().add(gameCollectionDao().findGameType(new GameType("Monopoly")));
+	
 			
 
-			return userDao;
+			return new UserDao();
 		}
 
 		
@@ -111,19 +118,14 @@ public class GameCollectionManagerSpringUnitTest {
 	public void shouldReturnUsersGameCollection() {
 
 		// given
-//		GameType gameType = new GameType("Chinczyk", 2, 4);
-//		gameType.setGameTypeID(1L);
-//		GameType secondGameType = new GameType("Monopoly", 2, 4);
-//		secondGameType.setGameTypeID(2L);
-		
+
 	
 		// when
 		
 		List<GameType> usersGameCollection = gameCollectionManager.findUsersGameCollection(3L);
 
 		// then
-//		assertTrue(usersGameCollection.contains(gameType));
-//		assertTrue(usersGameCollection.contains(secondGameType));
+
 		assertTrue(usersGameCollection.get(0).getName().equals("Chinczyk"));
 		assertTrue(usersGameCollection.get(0).getGameTypeID()==1L);
 		assertTrue(usersGameCollection.get(1).getName().equals("Monopoly"));
@@ -209,6 +211,7 @@ public class GameCollectionManagerSpringUnitTest {
 
 	}
 
+	@Test
 	public void shouldAddGameExistingInTheSystemToUsersCollection() throws IllegalArgumentException {
 
 		// given

@@ -90,141 +90,133 @@ public class PlayabilityManager {
 	public List<Challenge> createListOfPossibleChallenges(Long userID) {
 
 		List<Challenge> listOfPossibleChallenges = new ArrayList<>();
-		
+
 		User userLookingForChallengesFromRepo = userDao.findOneUserEntity(userID);
-		
+
 		List<User> usersListFromDao = userDao.findUsersList();
-		
-		
-		User currentlyCheckedUser=null;
-		for(int i=0; i<usersListFromDao.size(); i++){
-			
-			currentlyCheckedUser= usersListFromDao.get(i);
-			if(currentlyCheckedUser.equals(userLookingForChallengesFromRepo)){
+
+		User currentlyCheckedUser = null;
+		for (int i = 0; i < usersListFromDao.size(); i++) {
+
+			currentlyCheckedUser = usersListFromDao.get(i);
+			if (currentlyCheckedUser.equals(userLookingForChallengesFromRepo)) {
 				continue;
 			}
-			
-			List<Challenge> challengesListWithCurrentlyCheckedUser = 
-					checkBothUsersAvailabilityPeriodLists(userLookingForChallengesFromRepo, currentlyCheckedUser);
-			
-			listOfPossibleChallenges.addAll(challengesListWithCurrentlyCheckedUser);
-			
+
+			List<Challenge> challengesListWithCurrentlyCheckedUser = new ArrayList<>();
+			challengesListWithCurrentlyCheckedUser = checkBothUsersAvailabilityPeriodLists(
+					userLookingForChallengesFromRepo, currentlyCheckedUser);
+			if (!challengesListWithCurrentlyCheckedUser.isEmpty()) {
+				listOfPossibleChallenges.addAll(challengesListWithCurrentlyCheckedUser);
+			}
+
 		}
-		
+
 		return listOfPossibleChallenges;
 	}
 
 	private List<Challenge> checkBothUsersAvailabilityPeriodLists(User userLookingForChallengesFromRepo,
 			User currentlyCheckedUser) {
 
-		
-		List<Challenge> listOfPossibleChallengesOfTwoCurrentlyCheckedUsers= new ArrayList<>();
-		
-		List<AvailabilityPeriod> usersLookingForChallengesAvailabilityPeriodsList= 
-				userLookingForChallengesFromRepo.getAvailabilityPeriodList();
-		
-		List<AvailabilityPeriod> currentlyCheckedUserAvailabilityPeriodsList= 
-				currentlyCheckedUser.getAvailabilityPeriodList();
+		List<Challenge> listOfPossibleChallengesOfTwoCurrentlyCheckedUsers = new ArrayList<>();
 
-		for(int i=0; i<usersLookingForChallengesAvailabilityPeriodsList.size();i++){
-			
-			for(int j=0; j<currentlyCheckedUserAvailabilityPeriodsList.size();i++){
-				
-				AvailabilityPeriod currentlyCheckedAvailabilityPeriodOfUserLookingForChallenges=
-				usersLookingForChallengesAvailabilityPeriodsList.get(i);
-				
-				AvailabilityPeriod currentlyCheckedAvailabilityPeriodOfCurrentlyCheckedOpponent=
-						currentlyCheckedUserAvailabilityPeriodsList.get(j);
-				
-				Challenge challenge = createNewChallengeIfPossible(currentlyCheckedAvailabilityPeriodOfUserLookingForChallenges,
+		List<AvailabilityPeriod> usersLookingForChallengesAvailabilityPeriodsList = userLookingForChallengesFromRepo
+				.getAvailabilityPeriodList();
+
+		List<AvailabilityPeriod> currentlyCheckedOpponentAvailabilityPeriodsList = currentlyCheckedUser
+				.getAvailabilityPeriodList();
+
+		for (int i = 0; i < usersLookingForChallengesAvailabilityPeriodsList.size(); i++) {
+
+			AvailabilityPeriod currentlyCheckedAvailabilityPeriodOfUserLookingForChallenges = usersLookingForChallengesAvailabilityPeriodsList
+					.get(i);
+
+			for (int j = 0; j < currentlyCheckedOpponentAvailabilityPeriodsList.size(); j++) {
+
+				AvailabilityPeriod currentlyCheckedAvailabilityPeriodOfCurrentlyCheckedOpponent = currentlyCheckedOpponentAvailabilityPeriodsList
+						.get(j);
+
+				Challenge challenge = createNewChallengeIfPossible(
+						currentlyCheckedAvailabilityPeriodOfUserLookingForChallenges,
 						currentlyCheckedAvailabilityPeriodOfCurrentlyCheckedOpponent);
-				
-				if(challenge.equals(null)){
+
+				if (challenge == null) {
 					continue;
 				}
 				listOfPossibleChallengesOfTwoCurrentlyCheckedUsers.add(challenge);
-				
-				
+
 			}
-			
+
 		}
-		return null;
-		
+		return listOfPossibleChallengesOfTwoCurrentlyCheckedUsers;
+
 	}
 
 	private Challenge createNewChallengeIfPossible(
 			AvailabilityPeriod currentlyCheckedAvailabilityPeriodOfUserLookingForChallenges,
 			AvailabilityPeriod currentlyCheckedAvailabilityPeriodOfCurrentlyCheckedOpponent) {
-		
-		if(!currentlyCheckedAvailabilityPeriodOfUserLookingForChallenges.getDayOfTheWeek()
-				.equals(currentlyCheckedAvailabilityPeriodOfCurrentlyCheckedOpponent.getDayOfTheWeek())){
-			return null;	
-		}
-		
-		int beggingingTimeDifference = currentlyCheckedAvailabilityPeriodOfUserLookingForChallenges.getPeriodBegginingMinute() -
-				currentlyCheckedAvailabilityPeriodOfCurrentlyCheckedOpponent.getPeriodBegginingMinute();
-		
-		int endingTimeDifference = currentlyCheckedAvailabilityPeriodOfUserLookingForChallenges.getPeriodEndingMinute() -
-				currentlyCheckedAvailabilityPeriodOfCurrentlyCheckedOpponent.getPeriodEndingMinute();
-		
-	
-		
-		if(beggingingTimeDifference==0 && endingTimeDifference==0){
-			return new Challenge(currentlyCheckedAvailabilityPeriodOfUserLookingForChallenges.getUserID(),
-					currentlyCheckedAvailabilityPeriodOfCurrentlyCheckedOpponent.getUserID(),
-					currentlyCheckedAvailabilityPeriodOfUserLookingForChallenges.getDayOfTheWeek(),
-					currentlyCheckedAvailabilityPeriodOfUserLookingForChallenges.getBeggingingTime(),
-					currentlyCheckedAvailabilityPeriodOfUserLookingForChallenges.getEndingTime());
-			
-		}
-		
-		int possibleChallengeStartTimeMinute; 
-		int possibleChallengeEndTimeMinute;
-		
-		//czyli looking zaczyna pozniej niz opponent
-		if(beggingingTimeDifference>0){
-			
-			possibleChallengeStartTimeMinute=currentlyCheckedAvailabilityPeriodOfUserLookingForChallenges.getPeriodBegginingMinute();
-		}
-		else{
-			possibleChallengeStartTimeMinute=currentlyCheckedAvailabilityPeriodOfCurrentlyCheckedOpponent.getPeriodBegginingMinute();
-		}
-		
-		//czyli looking konczy pozniej niz opponent
-		if(endingTimeDifference>0){
-			possibleChallengeEndTimeMinute= currentlyCheckedAvailabilityPeriodOfCurrentlyCheckedOpponent.getPeriodEndingMinute();
-		}
-		else{
-			possibleChallengeEndTimeMinute=currentlyCheckedAvailabilityPeriodOfUserLookingForChallenges.getPeriodEndingMinute();
-		}
-		
-		
-		int challengeDurationInMinutes = possibleChallengeEndTimeMinute-possibleChallengeStartTimeMinute;
-		
-		
-		if(challengeDurationInMinutes<60){
+
+		if (!currentlyCheckedAvailabilityPeriodOfUserLookingForChallenges.getDayOfTheWeek()
+				.equals(currentlyCheckedAvailabilityPeriodOfCurrentlyCheckedOpponent.getDayOfTheWeek())) {
 			return null;
 		}
-		else{
-			double dividingRestStart = ((double)possibleChallengeStartTimeMinute)%(60d);
-			int minutesStart = (int) Math.round(60d * dividingRestStart);
-			int hourStart = possibleChallengeStartTimeMinute/60;
-			
-			Time begginingTime = new Time(hourStart, minutesStart);
-			
 
-			double dividingRestEnd = ((double)possibleChallengeEndTimeMinute)%(60d);
-			int minutesEnd = (int) Math.round(60d * dividingRestEnd);
-			int hourEnd = possibleChallengeEndTimeMinute/60;
-			
-			Time endingTime = new Time(hourEnd, minutesEnd);
-			
+		int beginningTimeDifference = currentlyCheckedAvailabilityPeriodOfUserLookingForChallenges
+				.getPeriodBegginingMinute()
+				- currentlyCheckedAvailabilityPeriodOfCurrentlyCheckedOpponent.getPeriodBegginingMinute();
+
+		int endingTimeDifference = currentlyCheckedAvailabilityPeriodOfUserLookingForChallenges.getPeriodEndingMinute()
+				- currentlyCheckedAvailabilityPeriodOfCurrentlyCheckedOpponent.getPeriodEndingMinute();
+
+		if (beginningTimeDifference == 0 && endingTimeDifference == 0) {
 			return new Challenge(currentlyCheckedAvailabilityPeriodOfUserLookingForChallenges.getUserID(),
 					currentlyCheckedAvailabilityPeriodOfCurrentlyCheckedOpponent.getUserID(),
 					currentlyCheckedAvailabilityPeriodOfUserLookingForChallenges.getDayOfTheWeek(),
-					begginingTime,endingTime);
-			
-			
+					currentlyCheckedAvailabilityPeriodOfUserLookingForChallenges.getBeginningTime(),
+					currentlyCheckedAvailabilityPeriodOfUserLookingForChallenges.getEndingTime());
+
+		}
+
+		int possibleChallengeStartTimeMinute;
+		int possibleChallengeEndTimeMinute;
+		Time beginningTime;
+		Time endingTime;
+
+		if (beginningTimeDifference > 0) {
+
+			possibleChallengeStartTimeMinute = currentlyCheckedAvailabilityPeriodOfUserLookingForChallenges
+					.getPeriodBegginingMinute();
+			beginningTime = currentlyCheckedAvailabilityPeriodOfUserLookingForChallenges.getBeginningTime();
+		} else {
+			possibleChallengeStartTimeMinute = currentlyCheckedAvailabilityPeriodOfCurrentlyCheckedOpponent
+					.getPeriodBegginingMinute();
+			beginningTime = currentlyCheckedAvailabilityPeriodOfCurrentlyCheckedOpponent.getBeginningTime();
+		}
+
+		if (endingTimeDifference > 0) {
+			possibleChallengeEndTimeMinute = currentlyCheckedAvailabilityPeriodOfCurrentlyCheckedOpponent
+					.getPeriodEndingMinute();
+			endingTime = currentlyCheckedAvailabilityPeriodOfCurrentlyCheckedOpponent.getEndingTime();
+		} else {
+			possibleChallengeEndTimeMinute = currentlyCheckedAvailabilityPeriodOfUserLookingForChallenges
+					.getPeriodEndingMinute();
+			endingTime = currentlyCheckedAvailabilityPeriodOfUserLookingForChallenges.getEndingTime();
+		}
+
+		int challengeDurationInMinutes = possibleChallengeEndTimeMinute - possibleChallengeStartTimeMinute;
+
+		if (challengeDurationInMinutes < 60) {
+			return null;
+		} else {
+
+			Challenge possibleChallenge = new Challenge(
+					currentlyCheckedAvailabilityPeriodOfUserLookingForChallenges.getUserID(),
+					currentlyCheckedAvailabilityPeriodOfCurrentlyCheckedOpponent.getUserID(),
+					currentlyCheckedAvailabilityPeriodOfUserLookingForChallenges.getDayOfTheWeek(), beginningTime,
+					endingTime);
+
+			return possibleChallenge;
+
 		}
 
 	}

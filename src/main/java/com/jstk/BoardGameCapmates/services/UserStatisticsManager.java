@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -14,11 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jstk.BoardGameCapmates.data.GameLogEntity;
-import com.jstk.BoardGameCapmates.data.RankingRecordTO;
 import com.jstk.BoardGameCapmates.data.UsersHistoryRecordTO;
 import com.jstk.BoardGameCapmates.enums.StatisticsType;
 import com.jstk.BoardGameCapmates.mappers.UserStatisticsMapper;
-import com.jstk.BoardGameCapmates.repository.GameCollectionDao;
 import com.jstk.BoardGameCapmates.repository.GameHistoryDao;
 
 @Service
@@ -66,7 +63,7 @@ public class UserStatisticsManager {
 		statisticsMap.put(StatisticsType.NUMBER_OF_GAMES_PLAYED, numberOfGamesPlayed);
 		statisticsMap.put(StatisticsType.NUMBER_OF_GAMES_WON, numberOfGamesWon);
 		statisticsMap.put(StatisticsType.WON_GAMES_RATIO, winningRatioInPrecentage);
-		statisticsMap.put(StatisticsType.NUMBER_OF_GAMES_LOST, numberOfGamesPlayed-numberOfGamesWon);
+		statisticsMap.put(StatisticsType.NUMBER_OF_GAMES_LOST, numberOfGamesPlayed - numberOfGamesWon);
 
 		return statisticsMap;
 	}
@@ -127,15 +124,6 @@ public class UserStatisticsManager {
 
 		}
 
-		// Map<Long, Integer> sortedMap =
-		// gameTypeRankingUnsortedMap.entrySet().stream()
-		// .sorted(Map.Entry.comparingByValue())
-		// .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
-		// (e2, e1) -> e2, LinkedHashMap::new));
-
-		// tworzy ranking z tym ze gracze o tej samej liczbie punktow maja rozne
-		// miejsca po sobie zgodnie z kolejnoscia
-		// dodania do mapy
 		return sortUsersByValuesDescending(gameTypeRankingUnsortedMap);
 	}
 
@@ -160,7 +148,7 @@ public class UserStatisticsManager {
 
 		for (int i = 0; i < rankingForOneGameType.size(); i++) {
 
-			if (rankingForOneGameType.get(i).getKey() == userID) {
+			if (rankingForOneGameType.get(i).getKey().equals(userID)) {
 				rankingSpot = i + 1;
 				break;
 			}

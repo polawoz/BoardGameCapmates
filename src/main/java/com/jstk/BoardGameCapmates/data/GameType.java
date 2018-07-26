@@ -6,17 +6,17 @@ public class GameType {
 	private String name;
 	private int minimumNumberOfPlayers;
 	private int maximumNumberOfPlayers;
-	
-	public GameType(String name, int minimumNumberOfPlayers, int maximumNumberOfPlayers){
-		this.name=name;
-		this.maximumNumberOfPlayers=maximumNumberOfPlayers;
-		this.minimumNumberOfPlayers=minimumNumberOfPlayers;
-		
+
+	public GameType(String name, int minimumNumberOfPlayers, int maximumNumberOfPlayers) {
+		this.name = name;
+		this.maximumNumberOfPlayers = maximumNumberOfPlayers;
+		this.minimumNumberOfPlayers = minimumNumberOfPlayers;
+
 	}
-	
-	public GameType(String name){
-		this.name=name;
-		
+
+	public GameType(String name) {
+		this.name = name;
+
 	}
 
 	public long getGameTypeID() {
@@ -50,8 +50,5 @@ public class GameType {
 	public void setMaximumNumberOfPlayers(int maximumNumberOfPlayers) {
 		this.maximumNumberOfPlayers = maximumNumberOfPlayers;
 	}
-	
-	
-	
-	
+
 }

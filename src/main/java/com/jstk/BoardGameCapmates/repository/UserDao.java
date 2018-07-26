@@ -23,20 +23,16 @@ public class UserDao {
 
 	}
 
-	// pomocnicze do testow
 	public void replaceUsersList(List<User> previouslyCreatedList) {
 		this.usersList = previouslyCreatedList;
 
 	}
 
-	
-	public List<User> findUsersList(){
-		
+	public List<User> findUsersList() {
+
 		return usersList;
 	}
-	
-	
-	
+
 	public User findOneUserEntity(Long userID) {
 
 		User searchedUser = usersList.stream().filter(x -> userID.equals(x.getUserID())).findAny().orElse(null);
@@ -92,15 +88,15 @@ public class UserDao {
 
 		AvailabilityPeriod availabilityPeriodToChangeEntity = findAvailabilityPeriod(entityCopyToChange);
 
-		if (!entityAfterChanges.getDayOfTheWeek().equals(null)) {
+		if (!(entityAfterChanges.getDayOfTheWeek() == null)) {
 			availabilityPeriodToChangeEntity.setDayOfTheWeek(entityAfterChanges.getDayOfTheWeek());
 		}
 
-		if (!entityAfterChanges.getBeggingingTime().equals(null)) {
-			availabilityPeriodToChangeEntity.setBeggingingTime(entityAfterChanges.getBeggingingTime());
+		if (!(entityAfterChanges.getBeginningTime() == null)) {
+			availabilityPeriodToChangeEntity.setBeggingingTime(entityAfterChanges.getBeginningTime());
 		}
 
-		if (!entityAfterChanges.getEndingTime().equals(null)) {
+		if (!(entityAfterChanges.getEndingTime() == null)) {
 			availabilityPeriodToChangeEntity.setEndingTime(entityAfterChanges.getEndingTime());
 		}
 

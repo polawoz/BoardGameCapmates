@@ -15,14 +15,14 @@ public class GameHistoryDao {
 
 	private List<GameLogEntity> listOfGameLogs;
 
-	
-	
 	public GameHistoryDao() {
 
 		this.listOfGameLogs = new ArrayList<>();
 
-	
+	}
 
+	public void reset() {
+		listOfGameLogs.clear();
 	}
 
 	public List<GameLogEntity> getListOfGameLogs() {
@@ -49,14 +49,12 @@ public class GameHistoryDao {
 
 	}
 
-	
-	
-	//to sie raczej nie przyda
+	// to sie raczej nie przyda
 	public List<GameLogEntity> findListOfOneGameTypeLogsFromOneUser(Long gameID, Long userID) {
 		List<GameLogEntity> listOfOneGameTypeLogsFromOneUser = new ArrayList<>();
 
-		listOfOneGameTypeLogsFromOneUser = listOfGameLogs.stream().filter(x -> gameID.equals(x.getGameID())).filter(x-> userID.equals(x.getUserID()))
-				.collect(Collectors.toList());
+		listOfOneGameTypeLogsFromOneUser = listOfGameLogs.stream().filter(x -> gameID.equals(x.getGameID()))
+				.filter(x -> userID.equals(x.getUserID())).collect(Collectors.toList());
 
 		return listOfOneGameTypeLogsFromOneUser;
 

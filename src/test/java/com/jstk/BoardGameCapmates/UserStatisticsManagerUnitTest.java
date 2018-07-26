@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,54 +33,62 @@ public class UserStatisticsManagerUnitTest {
 	@Autowired
 	private UserStatisticsMapper userStatisticsMapper;
 
+	@Before
+	public void reset(){
+		
+		gameHistoryDao.reset();
+		
+		GameLogEntity gameLogEntityGameOnePlayerOne = new GameLogEntity(1L, 1L, 1);
+		gameHistoryDao.getListOfGameLogs().add(gameLogEntityGameOnePlayerOne);
+		GameLogEntity gameLogEntityGameOnePlayerTwo = new GameLogEntity(2L, 1L, 0);
+		gameHistoryDao.getListOfGameLogs().add(gameLogEntityGameOnePlayerTwo);
+
+		GameLogEntity gameLogEntityGameTwoPlayerOne = new GameLogEntity(1L, 2L, 1);
+		gameHistoryDao.getListOfGameLogs().add(gameLogEntityGameTwoPlayerOne);
+		GameLogEntity gameLogEntityGameTwoPlayerThree = new GameLogEntity(3L, 2L, 0);
+		gameHistoryDao.getListOfGameLogs().add(gameLogEntityGameTwoPlayerThree);
+
+		GameLogEntity gameLogEntityGameThreePlayerTwo = new GameLogEntity(2L, 1L, 1);
+		gameHistoryDao.getListOfGameLogs().add(gameLogEntityGameThreePlayerTwo);
+		GameLogEntity gameLogEntityGameThreePlayerThree = new GameLogEntity(3L, 1L, 0);
+		gameHistoryDao.getListOfGameLogs().add(gameLogEntityGameThreePlayerThree);
+
+		GameLogEntity gameLogEntityGameFourPlayerOne = new GameLogEntity(1L, 1L, 0);
+		gameHistoryDao.getListOfGameLogs().add(gameLogEntityGameFourPlayerOne);
+		GameLogEntity gameLogEntityGameFourPlayerThree = new GameLogEntity(3L, 1L, 1);
+		gameHistoryDao.getListOfGameLogs().add(gameLogEntityGameFourPlayerThree);
+
+		GameLogEntity gameLogEntityGameFivePlayerTwo = new GameLogEntity(2L, 1L, 1);
+		gameHistoryDao.getListOfGameLogs().add(gameLogEntityGameFivePlayerTwo);
+		GameLogEntity gameLogEntityGameFivePlayerThree = new GameLogEntity(3L, 1L, 0);
+		gameHistoryDao.getListOfGameLogs().add(gameLogEntityGameFivePlayerThree);
+
+		GameLogEntity gameLogEntityGameSixPlayerOne = new GameLogEntity(1L, 1L, 1);
+		gameHistoryDao.getListOfGameLogs().add(gameLogEntityGameSixPlayerOne);
+		GameLogEntity gameLogEntityGameSixPlayerTwo = new GameLogEntity(2L, 1L, 0);
+		gameHistoryDao.getListOfGameLogs().add(gameLogEntityGameSixPlayerTwo);
+
+		GameLogEntity gameLogEntityGameSevenPlayerOne = new GameLogEntity(1L, 1L, 1);
+		gameHistoryDao.getListOfGameLogs().add(gameLogEntityGameSevenPlayerOne);
+		GameLogEntity gameLogEntityGameSevenPlayerThree = new GameLogEntity(3L, 1L, 0);
+		gameHistoryDao.getListOfGameLogs().add(gameLogEntityGameSevenPlayerThree);
+
+		GameLogEntity gameLogEntityGameEightPlayerOne = new GameLogEntity(1L, 1L, 0);
+		gameHistoryDao.getListOfGameLogs().add(gameLogEntityGameEightPlayerOne);
+		GameLogEntity gameLogEntityGameEightPlayerThree = new GameLogEntity(3L, 1L, 1);
+		gameHistoryDao.getListOfGameLogs().add(gameLogEntityGameEightPlayerThree);
+		
+		
+	}
+	
+	
 	@Configuration
 	static class UserStatisticsManagerTestContextConfiguration {
 
 		@Bean
 		public GameHistoryDao gameHistoryDao() {
-			GameHistoryDao gameHistoryDao = new GameHistoryDao();
-
-			GameLogEntity gameLogEntityGameOnePlayerOne = new GameLogEntity(1L, 1L, 1);
-			gameHistoryDao.getListOfGameLogs().add(gameLogEntityGameOnePlayerOne);
-			GameLogEntity gameLogEntityGameOnePlayerTwo = new GameLogEntity(2L, 1L, 0);
-			gameHistoryDao.getListOfGameLogs().add(gameLogEntityGameOnePlayerTwo);
-
-			GameLogEntity gameLogEntityGameTwoPlayerOne = new GameLogEntity(1L, 2L, 1);
-			gameHistoryDao.getListOfGameLogs().add(gameLogEntityGameTwoPlayerOne);
-			GameLogEntity gameLogEntityGameTwoPlayerThree = new GameLogEntity(3L, 2L, 0);
-			gameHistoryDao.getListOfGameLogs().add(gameLogEntityGameTwoPlayerThree);
-
-			GameLogEntity gameLogEntityGameThreePlayerTwo = new GameLogEntity(2L, 1L, 1);
-			gameHistoryDao.getListOfGameLogs().add(gameLogEntityGameThreePlayerTwo);
-			GameLogEntity gameLogEntityGameThreePlayerThree = new GameLogEntity(3L, 1L, 0);
-			gameHistoryDao.getListOfGameLogs().add(gameLogEntityGameThreePlayerThree);
-
-			GameLogEntity gameLogEntityGameFourPlayerOne = new GameLogEntity(1L, 1L, 0);
-			gameHistoryDao.getListOfGameLogs().add(gameLogEntityGameFourPlayerOne);
-			GameLogEntity gameLogEntityGameFourPlayerThree = new GameLogEntity(3L, 1L, 1);
-			gameHistoryDao.getListOfGameLogs().add(gameLogEntityGameFourPlayerThree);
-
-			GameLogEntity gameLogEntityGameFivePlayerTwo = new GameLogEntity(2L, 1L, 1);
-			gameHistoryDao.getListOfGameLogs().add(gameLogEntityGameFivePlayerTwo);
-			GameLogEntity gameLogEntityGameFivePlayerThree = new GameLogEntity(3L, 1L, 0);
-			gameHistoryDao.getListOfGameLogs().add(gameLogEntityGameFivePlayerThree);
-
-			GameLogEntity gameLogEntityGameSixPlayerOne = new GameLogEntity(1L, 1L, 1);
-			gameHistoryDao.getListOfGameLogs().add(gameLogEntityGameSixPlayerOne);
-			GameLogEntity gameLogEntityGameSixPlayerTwo = new GameLogEntity(2L, 1L, 0);
-			gameHistoryDao.getListOfGameLogs().add(gameLogEntityGameSixPlayerTwo);
-
-			GameLogEntity gameLogEntityGameSevenPlayerOne = new GameLogEntity(1L, 1L, 1);
-			gameHistoryDao.getListOfGameLogs().add(gameLogEntityGameSevenPlayerOne);
-			GameLogEntity gameLogEntityGameSevenPlayerThree = new GameLogEntity(3L, 1L, 0);
-			gameHistoryDao.getListOfGameLogs().add(gameLogEntityGameSevenPlayerThree);
-
-			GameLogEntity gameLogEntityGameEightPlayerOne = new GameLogEntity(1L, 1L, 0);
-			gameHistoryDao.getListOfGameLogs().add(gameLogEntityGameEightPlayerOne);
-			GameLogEntity gameLogEntityGameEightPlayerThree = new GameLogEntity(3L, 1L, 1);
-			gameHistoryDao.getListOfGameLogs().add(gameLogEntityGameEightPlayerThree);
-
-			return gameHistoryDao;
+			
+			return new GameHistoryDao();
 
 		}
 

@@ -45,7 +45,7 @@ public class GameCollectionManager {
 
 	}
 
-	//zalozenie: w systemie nie ma dwoch gier o takiej samej nazwie
+	// zalozenie: w systemie nie ma dwoch gier o takiej samej nazwie
 	public boolean checkIfGameTypeIsInTheSystemsGameCollectionByName(String gameTypeName) {
 
 		GameType gameTypeEntityOnlyWithName = gameCollectionMapper
@@ -64,8 +64,6 @@ public class GameCollectionManager {
 	public boolean checkIfUsersGameCollectionContainsGameTypeWithThatName(Long userID,
 			String gameTypeSearchedInUsersCollectionName) {
 
-		//optional isPresent()
-		
 		GameType gameTypeEntityOnlyWithName = gameCollectionMapper
 				.createGameTypeEntityOnlyWithNameParameter(gameTypeSearchedInUsersCollectionName);
 
