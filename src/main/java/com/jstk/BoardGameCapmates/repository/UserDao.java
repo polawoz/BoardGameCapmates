@@ -37,7 +37,7 @@ public class UserDao {
 
 		User searchedUser = usersList.stream().filter(x -> userID.equals(x.getUserID())).findAny().orElse(null);
 
-		LOGGER.info("All books were found repo");
+		LOGGER.info("Test logger in repo");
 
 		return searchedUser;
 	}

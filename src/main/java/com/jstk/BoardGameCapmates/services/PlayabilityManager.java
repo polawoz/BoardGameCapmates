@@ -3,6 +3,8 @@ package com.jstk.BoardGameCapmates.services;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.aspectj.lang.annotation.Pointcut;
+
 import com.jstk.BoardGameCapmates.data.AvailabilityPeriod;
 import com.jstk.BoardGameCapmates.data.AvailabilityPeriodTO;
 import com.jstk.BoardGameCapmates.data.Challenge;
@@ -87,6 +89,7 @@ public class PlayabilityManager {
 
 	}
 
+	
 	public List<Challenge> createListOfPossibleChallenges(Long userID) {
 
 		List<Challenge> listOfPossibleChallenges = new ArrayList<>();
