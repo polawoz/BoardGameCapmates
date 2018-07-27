@@ -12,6 +12,11 @@ public class GameTypeTO {
 		this.minimumNumberOfPlayers = minimumNumberOfPlayers;
 
 	}
+	
+	public GameTypeTO(){
+		
+		
+	}
 
 	public String getName() {
 		return name;
