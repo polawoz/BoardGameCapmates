@@ -15,6 +15,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.jstk.BoardGameCapmates.data.AvailabilityPeriod;
+import com.jstk.BoardGameCapmates.data.AvailabilityPeriodTO;
 import com.jstk.BoardGameCapmates.data.Challenge;
 import com.jstk.BoardGameCapmates.data.Time;
 import com.jstk.BoardGameCapmates.data.User;
@@ -119,6 +120,59 @@ public class PlayabilityManagerTest {
 		
 	}
 	
+	
+	@Test
+	public void shouldAddAvailabilityPeriod(){
+		
+		
+		//when
+		AvailabilityPeriodTO newAvailabilityPeriodTO = new AvailabilityPeriodTO(DayOfTheWeek.THURSDAY, new Time(17,45), new Time(19,20));
+		playabilityManager.addAvailabilityPeriod(3L, newAvailabilityPeriodTO);
+		
+		//then
+		List<AvailabilityPeriod> usersList = userDao.findOneUserEntity(3L).getAvailabilityPeriodList();
+		assertTrue(usersList.get(usersList.size()-1).getDayOfTheWeek().equals(newAvailabilityPeriodTO.getDayOfTheWeek()));
+		
+	}
+	
+	
+	
+	//@Test
+	public void shouldEditAvailabilityPeriod(){
+		
+		//when
+		AvailabilityPeriodTO availabilityPeriodToChangeTO = new AvailabilityPeriodTO(DayOfTheWeek.MONDAY, new Time(13, 30), new Time(18,30));
+		AvailabilityPeriodTO availabilityPeriodAfterChangesTO = new AvailabilityPeriodTO(null, null, new Time(17,15));
+		
+		playabilityManager.editAvailabilityPeriod(1L, availabilityPeriodToChangeTO, availabilityPeriodAfterChangesTO);
+		
+		//then
+		List<AvailabilityPeriod> usersList = userDao.findOneUserEntity(1L).getAvailabilityPeriodList();
+		assertTrue(usersList.get(0).getEndingTime().equals(availabilityPeriodAfterChangesTO.getEndingTime()));
+		assertTrue(usersList.get(0).getDayOfTheWeek().equals(DayOfTheWeek.MONDAY));
+
+		
+		
+		
+	}
+	
+	
+	@Test
+	public void shouldRemoveAvailabilityPeriod(){
+		
+		AvailabilityPeriodTO availabilityPeriodToRemoveTO = new AvailabilityPeriodTO(DayOfTheWeek.MONDAY, new Time(13,30), new Time(18,30));
+		//when
+
+		playabilityManager.removeAvailabilityPeriod(1L, availabilityPeriodToRemoveTO, "Ide do dentysty");
+		
+		//then
+		assertTrue(userDao.findOneUserEntity(1L).getAvailabilityPeriodList().isEmpty());
+		assertTrue(cancelledAvailabilityPeriodsDao.getUsersCancelledAvailabilityPeriodsList(1L).size()==1);
+		assertTrue(cancelledAvailabilityPeriodsDao.getUsersCancelledAvailabilityPeriodsList(1L).get(0).getComment().equals("Ide do dentysty"));
+		
+		
+		
+	}
 	
 	
 	

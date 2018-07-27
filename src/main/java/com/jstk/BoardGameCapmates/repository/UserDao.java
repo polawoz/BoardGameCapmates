@@ -20,7 +20,11 @@ public class UserDao {
 
 	public UserDao() {
 		this.usersList = new ArrayList<User>();
-
+		User newUser = new User(1L, "Jan", "Nowak", "jan.nowak@skrzynka.com", "Najzyciowsze zyciowe motto",
+				"hasloNowaka11");
+		newUser.getGameCollection().add(new GameType("Chinczyk", 2, 4));
+		newUser.getGameCollection().add(new GameType("Monopoly", 2, 4));
+		this.usersList.add(newUser);
 	}
 
 	public void replaceUsersList(List<User> previouslyCreatedList) {
