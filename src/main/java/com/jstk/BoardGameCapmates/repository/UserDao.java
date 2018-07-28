@@ -16,7 +16,7 @@ import com.jstk.BoardGameCapmates.data.User;
 public class UserDao {
 
 	private List<User> usersList;
-	private static final Logger LOGGER = LoggerFactory.getLogger(UserDao.class);
+	//private static final Logger LOGGER = LoggerFactory.getLogger(UserDao.class);
 
 	public UserDao() {
 		this.usersList = new ArrayList<User>();
@@ -41,7 +41,7 @@ public class UserDao {
 
 		User searchedUser = usersList.stream().filter(x -> userID.equals(x.getUserID())).findAny().orElse(null);
 
-		LOGGER.info("Test logger in repo");
+		//LOGGER.info("Method findUserEntity was called");
 
 		return searchedUser;
 	}

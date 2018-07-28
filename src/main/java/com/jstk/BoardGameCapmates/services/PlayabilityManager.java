@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.aspectj.lang.annotation.Pointcut;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.jstk.BoardGameCapmates.data.AvailabilityPeriod;
 import com.jstk.BoardGameCapmates.data.AvailabilityPeriodTO;
@@ -19,6 +22,7 @@ public class PlayabilityManager {
 	private final PlayabilityMapper playabilityMapper;
 	private final UserDao userDao;
 	private final CancelledAvailabilityPeriodsDao cancelledAvailabilityPeriodsDao;
+
 
 	public PlayabilityManager(PlayabilityMapper playabilityMapper, UserDao userDao,
 			CancelledAvailabilityPeriodsDao cancelledAvailabilityPeriodsDao) {
@@ -114,6 +118,8 @@ public class PlayabilityManager {
 			}
 
 		}
+		
+		
 
 		return listOfPossibleChallenges;
 	}
