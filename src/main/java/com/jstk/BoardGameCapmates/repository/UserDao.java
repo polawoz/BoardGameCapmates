@@ -40,6 +40,10 @@ public class UserDao {
 	public User findOneUserEntity(Long userID) {
 
 		User searchedUser = usersList.stream().filter(x -> userID.equals(x.getUserID())).findAny().orElse(null);
+		
+		if(searchedUser==null){
+			throw new NoSuchElementException();
+		}
 
 		//LOGGER.info("Method findUserEntity was called");
 

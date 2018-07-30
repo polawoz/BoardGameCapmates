@@ -19,8 +19,9 @@ public class UserProfileManagerController {
 	
 	
 	@Autowired
-	UserProfileManager userProfileManager;
+	private UserProfileManager userProfileManager;
 	
+
 	
 	@RequestMapping(value = "/users-profile-information", method = RequestMethod.GET)
 	public ProfileInformationTO findUsersProfileInformation(@RequestParam("stringUserID") String stringUserID) {

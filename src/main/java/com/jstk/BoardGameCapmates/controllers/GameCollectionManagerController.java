@@ -20,7 +20,7 @@ import com.jstk.BoardGameCapmates.services.GameCollectionManager;
 public class GameCollectionManagerController {
 
 	@Autowired
-	GameCollectionManager gameCollectionManager;
+	private GameCollectionManager gameCollectionManager;
 
 
 	@RequestMapping(value = "/users-game-collection", method = RequestMethod.GET)

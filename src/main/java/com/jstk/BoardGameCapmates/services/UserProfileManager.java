@@ -23,6 +23,7 @@ public class UserProfileManager {
 
 	public ProfileInformationTO findUserProfileInformation(Long userID) {
 
+	
 		User searchedUser = userDao.findOneUserEntity(userID);
 
 		ProfileInformationTO usersProfileInformation = userMapper.createOneUsersProfileInformation(searchedUser);
@@ -85,5 +86,6 @@ public class UserProfileManager {
 		}
 
 	}
+
 
 }

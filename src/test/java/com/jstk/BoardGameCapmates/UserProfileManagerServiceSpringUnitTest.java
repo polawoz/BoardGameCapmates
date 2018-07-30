@@ -23,7 +23,7 @@ import com.jstk.BoardGameCapmates.services.UserProfileManager;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration
-public class UserProfileManagerSpringUnitTest {
+public class UserProfileManagerServiceSpringUnitTest {
 
 	@Autowired
 	private UserDao userDao;
