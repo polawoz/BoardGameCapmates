@@ -8,6 +8,9 @@ import com.jstk.BoardGameCapmates.data.User;
 @Component
 public class UserMapper {
 
+
+	
+	
 	public ProfileInformationTO createOneUsersProfileInformation(User searchedUser) {
 
 		String firstName = searchedUser.getFirstName();

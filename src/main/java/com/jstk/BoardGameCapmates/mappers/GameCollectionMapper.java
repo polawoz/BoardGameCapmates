@@ -19,7 +19,14 @@ public class GameCollectionMapper {
 	public List<GameType> copyUsersGameCollection(User user) {
 
 		List<GameType> usersGameCollectionCopy = new ArrayList<>(user.getGameCollection());
-
+		
+//		for(int i=0; i<user.getGameCollection().size(); i++){
+//			GameType gameFromCollection = user.getGameCollection().get(i);
+//			GameType gameFromCollectionCopy = new GameType(gameFromCollection.getName(),
+//					gameFromCollection.getMinimumNumberOfPlayers(), gameFromCollection.getMaximumNumberOfPlayers());
+//			usersGameCollectionCopy.add(gameFromCollectionCopy);		
+//		}
+		
 		return usersGameCollectionCopy;
 	}
 

@@ -27,10 +27,17 @@ public class GameCollectionManager {
 		this.gameCollectionDao = gameCollectionDao;
 
 	}
+	
+	
+
+	
+	
 
 	public List<GameType> findUsersGameCollection(Long userID) {
 
 		User searchedUser = userDao.findOneUserEntity(userID);
+		
+		
 		List<GameType> usersGameCollection = gameCollectionMapper.copyUsersGameCollection(searchedUser);
 
 		return usersGameCollection;

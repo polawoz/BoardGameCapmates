@@ -43,10 +43,23 @@ public class UserProfileManagerController {
 
 	@RequestMapping(value = "/change-life-motto", method = RequestMethod.PUT)
 	public @ResponseBody ProfileInformationTO changeUsersLifeMotto(@RequestParam("id") String stringUserID,
-			@RequestBody String newLifeMotto) {
+			@RequestParam("lifeMotto") String newLifeMotto) {
 
 		Long userID = Long.valueOf(stringUserID);
 
 		return userProfileManager.changeLifeMotto(userID, newLifeMotto);
 	}
+	
+	
+//	@RequestMapping(value = "/change-life-motto", method = RequestMethod.PUT)
+//	public @ResponseBody ProfileInformationTO changeUsersLifeMotto(@RequestParam("id") String stringUserID,
+//			@RequestBody String newLifeMotto) {
+//
+//		Long userID = Long.valueOf(stringUserID);
+//
+//		return userProfileManager.changeLifeMotto(userID, newLifeMotto);
+//	}
+	
+	
+	
 }
