@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.jstk.BoardGameCapmates.data.ProfileInformationTO;
 import com.jstk.BoardGameCapmates.data.User;
+import com.jstk.BoardGameCapmates.exceptions.NoUserWithThatIDException;
 import com.jstk.BoardGameCapmates.mappers.UserMapper;
 import com.jstk.BoardGameCapmates.repository.UserDao;
 
@@ -21,7 +22,7 @@ public class UserProfileManager {
 
 	}
 
-	public ProfileInformationTO findUserProfileInformation(Long userID) {
+	public ProfileInformationTO findUserProfileInformation(Long userID) throws NoUserWithThatIDException {
 
 	
 		User searchedUser = userDao.findOneUserEntity(userID);
@@ -32,7 +33,7 @@ public class UserProfileManager {
 
 	}
 
-	public ProfileInformationTO changeFirstName(Long userID, String newFirstName) {
+	public ProfileInformationTO changeFirstName(Long userID, String newFirstName) throws NoUserWithThatIDException {
 
 		User searchedUser = userDao.findOneUserEntity(userID);
 		searchedUser.setFirstName(newFirstName);
@@ -43,7 +44,7 @@ public class UserProfileManager {
 
 	}
 
-	public ProfileInformationTO changeLastName(Long userID, String newLastName) {
+	public ProfileInformationTO changeLastName(Long userID, String newLastName) throws NoUserWithThatIDException {
 
 		User searchedUser = userDao.findOneUserEntity(userID);
 		searchedUser.setLastName(newLastName);
@@ -54,7 +55,7 @@ public class UserProfileManager {
 
 	}
 
-	public ProfileInformationTO changeEMail(Long userID, String newEMail) {
+	public ProfileInformationTO changeEMail(Long userID, String newEMail) throws NoUserWithThatIDException {
 
 		User searchedUser = userDao.findOneUserEntity(userID);
 		searchedUser.setEmailAddress(newEMail);
@@ -65,7 +66,7 @@ public class UserProfileManager {
 
 	}
 
-	public ProfileInformationTO changeLifeMotto(Long userID, String newLifeMotto) {
+	public ProfileInformationTO changeLifeMotto(Long userID, String newLifeMotto) throws NoUserWithThatIDException {
 
 		User searchedUser = userDao.findOneUserEntity(userID);
 		searchedUser.setLifeMotto(newLifeMotto);
@@ -76,7 +77,7 @@ public class UserProfileManager {
 
 	}
 
-	public void changePassword(Long userID, String oldPassword, String newPassword) {
+	public void changePassword(Long userID, String oldPassword, String newPassword) throws NoUserWithThatIDException {
 
 		User searchedUser = userDao.findOneUserEntity(userID);
 		if (searchedUser.getPassword().equals(oldPassword)) {

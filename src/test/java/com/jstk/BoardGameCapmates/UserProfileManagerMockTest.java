@@ -15,6 +15,7 @@ import org.springframework.test.util.ReflectionTestUtils;
 
 import com.jstk.BoardGameCapmates.data.ProfileInformationTO;
 import com.jstk.BoardGameCapmates.data.User;
+import com.jstk.BoardGameCapmates.exceptions.NoUserWithThatIDException;
 import com.jstk.BoardGameCapmates.mappers.UserMapper;
 import com.jstk.BoardGameCapmates.repository.UserDao;
 import com.jstk.BoardGameCapmates.services.UserProfileManager;
@@ -38,7 +39,7 @@ public class UserProfileManagerMockTest {
 	
 	
 	@Before
-	public void setUp(){
+	public void setUp() throws NoUserWithThatIDException{
 	
 		
 		
@@ -65,7 +66,7 @@ public class UserProfileManagerMockTest {
 	
 	
 	@Test
-	public void shouldReturnAndrzejPiasecznysProfileInformation(){
+	public void shouldReturnAndrzejPiasecznysProfileInformation() throws NoUserWithThatIDException{
 		
 		
 		//given

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jstk.BoardGameCapmates.data.ProfileInformationTO;
+import com.jstk.BoardGameCapmates.exceptions.NoUserWithThatIDException;
 import com.jstk.BoardGameCapmates.services.UserProfileManager;
 
 @ResponseBody
@@ -24,9 +25,9 @@ public class UserProfileManagerController {
 
 	
 	@RequestMapping(value = "/users-profile-information", method = RequestMethod.GET)
-	public ProfileInformationTO findUsersProfileInformation(@RequestParam("stringUserID") String stringUserID) {
+	public ProfileInformationTO findUsersProfileInformation(@RequestParam("userID") long userID) throws NoUserWithThatIDException {
 
-		Long userID = Long.valueOf(stringUserID);
+	
 		return userProfileManager.findUserProfileInformation(userID);
 
 	}
@@ -42,11 +43,10 @@ public class UserProfileManagerController {
 	// }
 
 	@RequestMapping(value = "/change-life-motto", method = RequestMethod.PUT)
-	public @ResponseBody ProfileInformationTO changeUsersLifeMotto(@RequestParam("id") String stringUserID,
-			@RequestParam("lifeMotto") String newLifeMotto) {
+	public @ResponseBody ProfileInformationTO changeUsersLifeMotto(@RequestParam("userID") long userID,
+			@RequestParam("lifeMotto") String newLifeMotto) throws NoUserWithThatIDException {
 
-		Long userID = Long.valueOf(stringUserID);
-
+	
 		return userProfileManager.changeLifeMotto(userID, newLifeMotto);
 	}
 	

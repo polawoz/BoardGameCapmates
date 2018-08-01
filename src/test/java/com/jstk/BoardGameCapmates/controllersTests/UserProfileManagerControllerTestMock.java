@@ -65,7 +65,7 @@ public class UserProfileManagerControllerTestMock {
 				.thenReturn(usersProfileInformation);
 
 		// when
-		ResultActions resultActions = mockMvc.perform(get("/users-profile-information?stringUserID=7766"));
+		ResultActions resultActions = mockMvc.perform(get("/users-profile-information?userID=7766"));
 		
 
 		// then
@@ -91,7 +91,7 @@ public class UserProfileManagerControllerTestMock {
 		.thenReturn(usersProfileInformation);
 		
 		//when
-		ResultActions resultActions = mockMvc.perform(put("/change-life-motto?id="+id+"&lifeMotto="+lifeMotto));
+		ResultActions resultActions = mockMvc.perform(put("/change-life-motto?userID="+id+"&lifeMotto="+lifeMotto));
 		//nazwa sciezki.content()
 		
 		//then

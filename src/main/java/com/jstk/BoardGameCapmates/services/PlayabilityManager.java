@@ -13,6 +13,7 @@ import com.jstk.BoardGameCapmates.data.AvailabilityPeriodTO;
 import com.jstk.BoardGameCapmates.data.Challenge;
 import com.jstk.BoardGameCapmates.data.Time;
 import com.jstk.BoardGameCapmates.data.User;
+import com.jstk.BoardGameCapmates.exceptions.NoUserWithThatIDException;
 import com.jstk.BoardGameCapmates.mappers.PlayabilityMapper;
 import com.jstk.BoardGameCapmates.repository.CancelledAvailabilityPeriodsDao;
 import com.jstk.BoardGameCapmates.repository.UserDao;
@@ -31,7 +32,7 @@ public class PlayabilityManager {
 		this.cancelledAvailabilityPeriodsDao = cancelledAvailabilityPeriodsDao;
 	}
 
-	public List<AvailabilityPeriod> findUsersAvailabilityPeriodList(Long userID) {
+	public List<AvailabilityPeriod> findUsersAvailabilityPeriodList(Long userID) throws NoUserWithThatIDException {
 		User searchedUser = userDao.findOneUserEntity(userID);
 		List<AvailabilityPeriod> usersAvailabilityPeriodList = playabilityMapper
 				.copyUsersAvailabilityPeriodList(searchedUser);
@@ -51,7 +52,7 @@ public class PlayabilityManager {
 		return cancelledAvailabilityPeriodListTO;
 	}
 
-	public void addAvailabilityPeriod(Long userID, AvailabilityPeriodTO newAvailabilityPeriodTO) {
+	public void addAvailabilityPeriod(Long userID, AvailabilityPeriodTO newAvailabilityPeriodTO) throws NoUserWithThatIDException {
 
 		User searchedUser = userDao.findOneUserEntity(userID);
 
@@ -63,7 +64,7 @@ public class PlayabilityManager {
 	}
 
 	public void editAvailabilityPeriod(Long userID, AvailabilityPeriodTO availabilityPeriodToChangeTO,
-			AvailabilityPeriodTO availabilityPeriodAfterChangesTO) {
+			AvailabilityPeriodTO availabilityPeriodAfterChangesTO) throws NoUserWithThatIDException {
 
 		AvailabilityPeriod entityCopyToChange = playabilityMapper.createAvailabilityPeriodEntityFromTO(userID,
 				availabilityPeriodToChangeTO);
@@ -76,7 +77,7 @@ public class PlayabilityManager {
 	}
 
 	public void removeAvailabilityPeriod(Long userID, AvailabilityPeriodTO availabilityPeriodToRemoveTO,
-			String comment) {
+			String comment) throws NoUserWithThatIDException {
 
 		AvailabilityPeriod entityCopyToRemove = playabilityMapper.createAvailabilityPeriodEntityFromTO(userID,
 				availabilityPeriodToRemoveTO);
@@ -94,7 +95,7 @@ public class PlayabilityManager {
 	}
 
 	
-	public List<Challenge> createListOfPossibleChallenges(Long userID) {
+	public List<Challenge> createListOfPossibleChallenges(Long userID) throws NoUserWithThatIDException {
 
 		List<Challenge> listOfPossibleChallenges = new ArrayList<>();
 

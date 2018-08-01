@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jstk.BoardGameCapmates.data.GameType;
 import com.jstk.BoardGameCapmates.data.GameTypeTO;
+import com.jstk.BoardGameCapmates.exceptions.GameIsAlreadyInUsersCollectionException;
+import com.jstk.BoardGameCapmates.exceptions.NoGameToMeetConditionsException;
+import com.jstk.BoardGameCapmates.exceptions.NoUserWithThatIDException;
 import com.jstk.BoardGameCapmates.services.GameCollectionManager;
 
 @ResponseBody
@@ -24,42 +27,34 @@ public class GameCollectionManagerController {
 
 
 	@RequestMapping(value = "/users-game-collection", method = RequestMethod.GET)
-	public List<GameType> findUsersGameCollection(@RequestParam("stringUserID") String stringUserID) {
+	public List<GameType> findUsersGameCollection(@RequestParam("userID") long userID) throws NoUserWithThatIDException {
 
-		Long userID = Long.valueOf(stringUserID);
+		
 		return gameCollectionManager.findUsersGameCollection(userID);
 
 	}
 
 	@RequestMapping(value = "/add-game-to-collection", method = RequestMethod.POST)
-	public List<GameType> findUsersGameCollection(@RequestParam("stringUserID") String stringUserID,
-			@RequestBody GameTypeTO gameTypeTO) {
+	public List<GameType> findUsersGameCollection(@RequestParam("userID") long userID,
+			@RequestBody GameTypeTO gameTypeTO) throws GameIsAlreadyInUsersCollectionException, NoUserWithThatIDException {
 
-		Long userID = Long.valueOf(stringUserID);
 		gameCollectionManager.addGameToUsersCollection(userID, gameTypeTO);
 		return gameCollectionManager.findUsersGameCollection(userID);
 
 	}
+	
+	
+	@RequestMapping(value="/findGame", method=RequestMethod.GET)
+	public List<GameTypeTO> findGameByParameters(@RequestParam(value="name", required=false, defaultValue="") String name,
+			@RequestParam(value="minNo", required=false, defaultValue="20") int minNoPlayers, 
+			@RequestParam(value="maxNo", required=false, defaultValue="2") int maxNoPlayers) throws NoGameToMeetConditionsException{
+		
+		
+		
+		return gameCollectionManager.findGamesByParameters(name, minNoPlayers, maxNoPlayers);
+	}
 
-	// @RequestMapping(value = "/add-game-to-collection", method =
-	// RequestMethod.POST)
-	// public List<GameType>
-	// findUsersGameCollection(@RequestParam("stringUserID") String
-	// stringUserID,
-	// @RequestParam("gameName") String name,
-	// @RequestParam("maxPlayers") int maximumNumberOfPlayers,
-	// @RequestParam("minPlayers") int minimumNumberOfPlayers) {
-	//
-	//
-	// Long userID = Long.valueOf(stringUserID);
-	// GameTypeTO gameTypeToBeAddedToCollection= new GameTypeTO(name,
-	// minimumNumberOfPlayers,
-	// maximumNumberOfPlayers);
-	// gameCollectionManager.addGameToUsersCollection(userID,
-	// gameTypeToBeAddedToCollection);
-	// return gameCollectionManager.findUsersGameCollection(userID);
-	//
-	// }
+	
 
 	
 

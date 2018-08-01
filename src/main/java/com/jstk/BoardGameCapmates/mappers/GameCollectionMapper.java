@@ -19,14 +19,16 @@ public class GameCollectionMapper {
 	public List<GameType> copyUsersGameCollection(User user) {
 
 		List<GameType> usersGameCollectionCopy = new ArrayList<>(user.getGameCollection());
-		
-//		for(int i=0; i<user.getGameCollection().size(); i++){
-//			GameType gameFromCollection = user.getGameCollection().get(i);
-//			GameType gameFromCollectionCopy = new GameType(gameFromCollection.getName(),
-//					gameFromCollection.getMinimumNumberOfPlayers(), gameFromCollection.getMaximumNumberOfPlayers());
-//			usersGameCollectionCopy.add(gameFromCollectionCopy);		
-//		}
-		
+
+		// for(int i=0; i<user.getGameCollection().size(); i++){
+		// GameType gameFromCollection = user.getGameCollection().get(i);
+		// GameType gameFromCollectionCopy = new
+		// GameType(gameFromCollection.getName(),
+		// gameFromCollection.getMinimumNumberOfPlayers(),
+		// gameFromCollection.getMaximumNumberOfPlayers());
+		// usersGameCollectionCopy.add(gameFromCollectionCopy);
+		// }
+
 		return usersGameCollectionCopy;
 	}
 
@@ -44,5 +46,23 @@ public class GameCollectionMapper {
 		return gameTypeWithoutGameID;
 	}
 
-	
+	public GameTypeTO createGameTypeTo(GameType gameTypeEntity) {
+
+		return new GameTypeTO(gameTypeEntity.getName(), gameTypeEntity.getMinimumNumberOfPlayers(),
+				gameTypeEntity.getMaximumNumberOfPlayers());
+	}
+
+	public List<GameTypeTO> createListOfGameTypeTO(List<GameType> listOfGameTypeEntities) {
+
+		List<GameTypeTO> listOfGameTypeTO= new ArrayList<>();
+
+		for (GameType entity : listOfGameTypeEntities) {
+
+			listOfGameTypeTO.add(createGameTypeTo(entity));
+
+		}
+		return listOfGameTypeTO;
+
+	}
+
 }

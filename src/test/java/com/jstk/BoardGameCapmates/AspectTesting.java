@@ -7,6 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.jstk.BoardGameCapmates.exceptions.NoUserWithThatIDException;
 import com.jstk.BoardGameCapmates.repository.UserDao;
 import com.jstk.BoardGameCapmates.services.PlayabilityManager;
 
@@ -19,8 +20,8 @@ public class AspectTesting {
 	@Autowired
 	private PlayabilityManager playabilityManager;
 
-	@Test
-	public void shouldTestFindUserEntity() {
+	//@Test
+	public void shouldTestFindUserEntity() throws NoUserWithThatIDException {
 
 		// given
 		userDao.findOneUserEntity(3L);
@@ -28,7 +29,7 @@ public class AspectTesting {
 	}
 
 	@Test
-	public void shouldCountTimeElapsed() {
+	public void shouldCountTimeElapsed() throws NoUserWithThatIDException {
 
 		// given
 		playabilityManager.createListOfPossibleChallenges(1L);

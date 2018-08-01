@@ -44,7 +44,7 @@ public class UserProfileManagerControllerTest {
     	final String lifeMotto="Najzyciowsze zyciowe motto";
 
         // when
-        ResultActions resultActions = mockMvc.perform(get("/users-profile-information").param("stringUserID", "1"));
+        ResultActions resultActions = mockMvc.perform(get("/users-profile-information").param("userID", "1"));
 
         // then
         resultActions.andExpect(status().isOk()).andExpect(jsonPath("firstName").value(firstName))

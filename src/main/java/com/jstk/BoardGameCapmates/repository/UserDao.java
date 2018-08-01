@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.jstk.BoardGameCapmates.data.AvailabilityPeriod;
 import com.jstk.BoardGameCapmates.data.GameType;
 import com.jstk.BoardGameCapmates.data.User;
+import com.jstk.BoardGameCapmates.exceptions.NoUserWithThatIDException;
 
 @Repository
 public class UserDao {
@@ -37,12 +38,12 @@ public class UserDao {
 		return usersList;
 	}
 
-	public User findOneUserEntity(Long userID) {
+	public User findOneUserEntity(Long userID) throws NoUserWithThatIDException {
 
 		User searchedUser = usersList.stream().filter(x -> userID.equals(x.getUserID())).findAny().orElse(null);
 		
 		if(searchedUser==null){
-			throw new NoSuchElementException();
+			throw new NoUserWithThatIDException();
 		}
 
 		//LOGGER.info("Method findUserEntity was called");
@@ -78,7 +79,7 @@ public class UserDao {
 
 	}
 
-	public AvailabilityPeriod findAvailabilityPeriod(AvailabilityPeriod searchedEntity) {
+	public AvailabilityPeriod findAvailabilityPeriod(AvailabilityPeriod searchedEntity) throws NoUserWithThatIDException {
 
 		AvailabilityPeriod searchedPeriodFromRepo = findOneUserEntity(searchedEntity.getUserID())
 				.getAvailabilityPeriodList().stream()
@@ -92,7 +93,7 @@ public class UserDao {
 	}
 
 	public void changeUsersAvailabilityPeriod(AvailabilityPeriod entityCopyToChange,
-			AvailabilityPeriod entityAfterChanges) {
+			AvailabilityPeriod entityAfterChanges) throws NoUserWithThatIDException {
 
 		AvailabilityPeriod availabilityPeriodToChangeEntity = findAvailabilityPeriod(entityCopyToChange);
 

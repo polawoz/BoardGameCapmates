@@ -17,6 +17,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.jstk.BoardGameCapmates.data.ProfileInformationTO;
 import com.jstk.BoardGameCapmates.data.User;
+import com.jstk.BoardGameCapmates.exceptions.NoUserWithThatIDException;
 import com.jstk.BoardGameCapmates.mappers.UserMapper;
 import com.jstk.BoardGameCapmates.repository.UserDao;
 import com.jstk.BoardGameCapmates.services.UserProfileManager;
@@ -70,7 +71,7 @@ public class UserProfileManagerServiceSpringUnitTest {
 	}
 
 	@Test
-	public void shouldReturnEqualProfileInformation() {
+	public void shouldReturnEqualProfileInformation() throws NoUserWithThatIDException{
 
 		// given
 
@@ -86,7 +87,7 @@ public class UserProfileManagerServiceSpringUnitTest {
 	}
 
 	@Test
-	public void shouldReturnProfileInformationWithChangedFirstName() {
+	public void shouldReturnProfileInformationWithChangedFirstName() throws NoUserWithThatIDException{
 
 		// given
 
@@ -102,7 +103,7 @@ public class UserProfileManagerServiceSpringUnitTest {
 	}
 
 	@Test
-	public void shouldReturnProfileInformationWithChangedLastName() {
+	public void shouldReturnProfileInformationWithChangedLastName() throws NoUserWithThatIDException{
 
 		// given
 
@@ -118,7 +119,7 @@ public class UserProfileManagerServiceSpringUnitTest {
 	}
 
 	@Test
-	public void shouldReturnProfileInformationWithChangedEMailAddress() {
+	public void shouldReturnProfileInformationWithChangedEMailAddress() throws NoUserWithThatIDException{
 
 		// given
 
@@ -134,7 +135,7 @@ public class UserProfileManagerServiceSpringUnitTest {
 	}
 
 	@Test
-	public void shouldReturnProfileInformationWithChangedLifeMotto() {
+	public void shouldReturnProfileInformationWithChangedLifeMotto() throws NoUserWithThatIDException{
 
 		// given
 
@@ -150,7 +151,7 @@ public class UserProfileManagerServiceSpringUnitTest {
 	}
 
 	@Test
-	public void shouldChangeUsersPassword() {
+	public void shouldChangeUsersPassword() throws NoUserWithThatIDException{
 
 		// given
 
@@ -165,7 +166,7 @@ public class UserProfileManagerServiceSpringUnitTest {
 	}
 
 	@Test
-	public void shouldThrowIllegalArgumentExceptionWhenUserTriesToChangeHisPassword() {
+	public void shouldThrowIllegalArgumentExceptionWhenUserTriesToChangeHisPassword() throws NoUserWithThatIDException{
 
 		// given
 

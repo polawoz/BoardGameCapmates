@@ -1,6 +1,6 @@
 package com.jstk.BoardGameCapmates.repository;
 
-import java.util.ArrayList;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -8,8 +8,9 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Repository;
 
-import com.jstk.BoardGameCapmates.data.GameSearchParameters;
+
 import com.jstk.BoardGameCapmates.data.GameType;
+import com.jstk.BoardGameCapmates.exceptions.NoGameToMeetConditionsException;
 
 @Repository
 public class GameCollectionDao {
@@ -18,6 +19,21 @@ public class GameCollectionDao {
 
 	public GameCollectionDao() {
 		this.systemsGameCollection = new HashSet<>();
+		
+
+		GameType gameType = new GameType("Chinczyk", 2, 4);
+		gameType.setGameTypeID(1L);
+		systemsGameCollection.add(gameType);
+		GameType secondGameType = new GameType("Monopoly", 2, 6);
+		secondGameType.setGameTypeID(2L);
+		systemsGameCollection.add(secondGameType);
+		GameType thirdGameType = new GameType("Eurobiznes", 3, 6);
+		thirdGameType.setGameTypeID(3L);
+		systemsGameCollection.add(thirdGameType);
+		GameType fourthGameType = new GameType("Europa", 3, 10);
+		fourthGameType.setGameTypeID(4L);
+		systemsGameCollection.add(fourthGameType);
+		
 
 	}
 
@@ -51,37 +67,19 @@ public class GameCollectionDao {
 		return foundGameType;
 	}
 
-	public List<GameType> findGameByParameters(GameSearchParameters parametersTO) {
+	public List<GameType> findGameByParameters(String name, int minNoPlayers, int maxNoPlayers) {
 
-		List<GameType> listOfFoundGames = new ArrayList<>();
-
-		if (parametersTO.getName() != null && parametersTO.getMinimumNumberOfPlayers() != 0
-				&& parametersTO.getMaximumNumberOfPlayers() != 0) {
-
-			listOfFoundGames = systemsGameCollection.stream()
-					.filter(x -> x.getName().contains(parametersTO.getName())
-							&& parametersTO.getMinimumNumberOfPlayers() == x.getMinimumNumberOfPlayers()
-							&& parametersTO.getMaximumNumberOfPlayers() == x.getMaximumNumberOfPlayers())
-					.collect(Collectors.toList());
-
-		}
+		List<GameType> listOfFoundGames = systemsGameCollection.stream()
+				.filter(x-> x.getName().toLowerCase().contains(name.toLowerCase()))
+				.collect(Collectors.toList())
+				.stream()
+				.filter(x-> x.getMinimumNumberOfPlayers()<=minNoPlayers)
+				.collect(Collectors.toList())
+				.stream()
+				.filter(x-> x.getMaximumNumberOfPlayers()>=maxNoPlayers)
+				.collect(Collectors.toList());
 		
-
-		if (parametersTO.getName() == null && parametersTO.getMinimumNumberOfPlayers() != 0
-				&& parametersTO.getMaximumNumberOfPlayers() != 0) {
-
-			listOfFoundGames = systemsGameCollection.stream()
-					.filter(x -> parametersTO.getMinimumNumberOfPlayers() == x.getMinimumNumberOfPlayers()
-							&& parametersTO.getMaximumNumberOfPlayers() == x.getMaximumNumberOfPlayers())
-					.collect(Collectors.toList());
-
-		}
-		
-		
-		
-		
-		
-
+	
 		return listOfFoundGames;
 
 	}

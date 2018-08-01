@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 import com.jstk.BoardGameCapmates.data.GameType;
 import com.jstk.BoardGameCapmates.data.GameTypeTO;
 import com.jstk.BoardGameCapmates.data.User;
+import com.jstk.BoardGameCapmates.exceptions.GameIsAlreadyInUsersCollectionException;
+import com.jstk.BoardGameCapmates.exceptions.NoGameToMeetConditionsException;
+import com.jstk.BoardGameCapmates.exceptions.NoUserWithThatIDException;
 import com.jstk.BoardGameCapmates.mappers.GameCollectionMapper;
 import com.jstk.BoardGameCapmates.repository.GameCollectionDao;
 import com.jstk.BoardGameCapmates.repository.UserDao;
@@ -27,17 +30,11 @@ public class GameCollectionManager {
 		this.gameCollectionDao = gameCollectionDao;
 
 	}
-	
-	
 
-	
-	
-
-	public List<GameType> findUsersGameCollection(Long userID) {
+	public List<GameType> findUsersGameCollection(Long userID) throws NoUserWithThatIDException {
 
 		User searchedUser = userDao.findOneUserEntity(userID);
-		
-		
+
 		List<GameType> usersGameCollection = gameCollectionMapper.copyUsersGameCollection(searchedUser);
 
 		return usersGameCollection;
@@ -84,7 +81,8 @@ public class GameCollectionManager {
 
 	}
 
-	public void addGameToUsersCollection(Long userID, GameTypeTO gameTypeToBeAddedToCollection) {
+	public void addGameToUsersCollection(Long userID, GameTypeTO gameTypeToBeAddedToCollection)
+			throws GameIsAlreadyInUsersCollectionException, NoUserWithThatIDException {
 
 		boolean gameTypeIsNotInTheSystemsGameCollection = !checkIfGameTypeIsInTheSystemsGameCollectionByName(
 				gameTypeToBeAddedToCollection.getName());
@@ -102,7 +100,7 @@ public class GameCollectionManager {
 				userID, gameTypeToBeAddedToCollection.getName());
 
 		if (usersCollectionAlreadyContainsGameTypeWithThatName) {
-			throw new IllegalArgumentException("This users game collection already contains game type with that name!");
+			throw new GameIsAlreadyInUsersCollectionException();
 		} else {
 			GameType gameTypeEntityOnlyWithName = gameCollectionMapper
 					.createGameTypeEntityOnlyWithNameParameter(gameTypeToBeAddedToCollection.getName());
@@ -111,6 +109,20 @@ public class GameCollectionManager {
 			userDao.findOneUserEntity(userID).getGameCollection().add(gameTypeFromSystemGameCollection);
 
 		}
+
+	}
+
+	public List<GameTypeTO> findGamesByParameters(String name, int minNoPlayers, int maxNoPlayers)
+			throws NoGameToMeetConditionsException {
+
+		List<GameTypeTO> listOfFoundGames = gameCollectionMapper
+				.createListOfGameTypeTO(gameCollectionDao.findGameByParameters(name, minNoPlayers, maxNoPlayers));
+
+		if (listOfFoundGames.size() == 0) {
+			throw new NoGameToMeetConditionsException();
+		}
+
+		return listOfFoundGames;
 
 	}
 
