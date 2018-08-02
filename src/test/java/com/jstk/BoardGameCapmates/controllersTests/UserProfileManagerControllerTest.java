@@ -20,43 +20,33 @@ import com.jstk.BoardGameCapmates.BoardGameCapmatesApplication;
 @SpringBootTest(classes = BoardGameCapmatesApplication.class)
 @WebAppConfiguration
 public class UserProfileManagerControllerTest {
-	
-	
-	
+
 	private MockMvc mockMvc;
-	
-	
-	
+
 	@Autowired
-    private WebApplicationContext webApplicationContext;
+	private WebApplicationContext webApplicationContext;
 
-    @Before
-    public void setUp() {
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build(); 
-    }
+	@Before
+	public void setUp() {
+		this.mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+	}
 
-    @Test
-    public void shouldReturnUsersProfileInformation() throws Exception {
-        // given
-    	final String firstName="Jan";
-    	final String lastName="Nowak";
-    	final String emailAddress="jan.nowak@skrzynka.com";
-    	final String lifeMotto="Najzyciowsze zyciowe motto";
+	@Test
+	public void shouldReturnUsersProfileInformation() throws Exception {
+		// given
+		final String firstName = "Jan";
+		final String lastName = "Nowak";
+		final String emailAddress = "jan.nowak@skrzynka.com";
+		final String lifeMotto = "Najzyciowsze zyciowe motto";
 
-        // when
-        ResultActions resultActions = mockMvc.perform(get("/users-profile-information").param("userID", "1"));
+		// when
+		ResultActions resultActions = mockMvc.perform(get("/users-profile-information").param("userID", "1"));
 
-        // then
-        resultActions.andExpect(status().isOk()).andExpect(jsonPath("firstName").value(firstName))
-        .andExpect(jsonPath("lastName").value(lastName))
-        .andExpect(jsonPath("emailAddress").value(emailAddress))
-        .andExpect(jsonPath("lifeMotto").value(lifeMotto));
-        
-      
-    }
+		// then
+		resultActions.andExpect(status().isOk()).andExpect(jsonPath("firstName").value(firstName))
+				.andExpect(jsonPath("lastName").value(lastName)).andExpect(jsonPath("emailAddress").value(emailAddress))
+				.andExpect(jsonPath("lifeMotto").value(lifeMotto));
 
-	
-	
-	
+	}
 
 }

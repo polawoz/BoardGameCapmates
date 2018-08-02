@@ -1,0 +1,462 @@
+{
+	"info": {
+		"_postman_id": "fe08f3f6-5159-498b-8ab6-ec064027b286",
+		"name": "BoardGameCapmatesRequests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "findGameThatNeedsNotMoreThan3PlayersAndHasLimitOfPlayers3OrHigher",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n\t\"name\": \"KokoJambo\",\n\t\"minimumNumberOfPlayers\": 2,\n\t\n\n\"maximumNumberOfPlayers\": 5\n\n\n\n\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/findGame?maxNo=3&minNo=3",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"findGame"
+					],
+					"query": [
+						{
+							"key": "maxNo",
+							"value": "3"
+						},
+						{
+							"key": "minNo",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findGameThatNeedsNotMoreThan2PlayersAndHasLimitOfPlayers2OrHigher",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n\t\"name\": \"KokoJambo\",\n\t\"minimumNumberOfPlayers\": 2,\n\t\n\n\"maximumNumberOfPlayers\": 5\n\n\n\n\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/findGame?maxNo=3&minNo=3",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"findGame"
+					],
+					"query": [
+						{
+							"key": "maxNo",
+							"value": "3"
+						},
+						{
+							"key": "minNo",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findGameThatNeedsNotMoreThan6PlayersAndHasLimitOfPlayers6OrHigher",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n\t\"name\": \"KokoJambo\",\n\t\"minimumNumberOfPlayers\": 2,\n\t\n\n\"maximumNumberOfPlayers\": 5\n\n\n\n\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/findGame?maxNo=6&minNo=6",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"findGame"
+					],
+					"query": [
+						{
+							"key": "maxNo",
+							"value": "6"
+						},
+						{
+							"key": "minNo",
+							"value": "6"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findGameThatNeedsNotMoreThan7PlayersAndHasLimitOfPlayers7OrHigher",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n\t\"name\": \"KokoJambo\",\n\t\"minimumNumberOfPlayers\": 2,\n\t\n\n\"maximumNumberOfPlayers\": 5\n\n\n\n\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/findGame?maxNo=7&minNo=7",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"findGame"
+					],
+					"query": [
+						{
+							"key": "maxNo",
+							"value": "7"
+						},
+						{
+							"key": "minNo",
+							"value": "7"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findGameWhichNameContainsWordEuro",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n\t\"name\": \"KokoJambo\",\n\t\"minimumNumberOfPlayers\": 2,\n\t\n\n\"maximumNumberOfPlayers\": 5\n\n\n\n\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/findGame?name=Euro",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"findGame"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Euro"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "finGameWhichNameContainsWordEuroAndCanPlay8OrMorePlayers",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n\t\"name\": \"KokoJambo\",\n\t\"minimumNumberOfPlayers\": 2,\n\t\n\n\"maximumNumberOfPlayers\": 5\n\n\n\n\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/findGame?name=Euro&maxNo=8",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"findGame"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Euro"
+						},
+						{
+							"key": "maxNo",
+							"value": "8"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findUsersGameCollection",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n\t\"name\": \"KokoJambo\",\n\t\"minimumNumberOfPlayers\": 2,\n\t\n\n\"maximumNumberOfPlayers\": 5\n\n\n\n\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/users-game-collection?userID=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users-game-collection"
+					],
+					"query": [
+						{
+							"key": "userID",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addKokoJamboToUsersGameCollection",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n\t\"name\": \"KokoJambo\",\n\t\"minimumNumberOfPlayers\": 2,\n\t\n\n\"maximumNumberOfPlayers\": 5\n\n\n\n\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/add-game-to-collection?userID=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"add-game-to-collection"
+					],
+					"query": [
+						{
+							"key": "userID",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "changeUsersLifeMotto",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n\t\"name\": \"KokoJambo\",\n\t\"minimumNumberOfPlayers\": 2,\n\t\n\n\"maximumNumberOfPlayers\": 5\n\n\n\n\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/change-life-motto?userID=1&lifeMotto=To jest nowe motto",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"change-life-motto"
+					],
+					"query": [
+						{
+							"key": "userID",
+							"value": "1"
+						},
+						{
+							"key": "lifeMotto",
+							"value": "To jest nowe motto"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getUsersProfileInformation",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n\t\"name\": \"KokoJambo\",\n\t\"minimumNumberOfPlayers\": 2,\n\t\n\n\"maximumNumberOfPlayers\": 5\n\n\n\n\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/users-profile-information?userID=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users-profile-information"
+					],
+					"query": [
+						{
+							"key": "userID",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "noUserWithThatIDException",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n\t\"name\": \"KokoJambo\",\n\t\"minimumNumberOfPlayers\": 2,\n\t\n\n\"maximumNumberOfPlayers\": 5\n\n\n\n\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/users-profile-information?userID=4",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users-profile-information"
+					],
+					"query": [
+						{
+							"key": "userID",
+							"value": "4"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "noGameToMeetConditionsException",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n\t\"name\": \"KokoJambo\",\n\t\"minimumNumberOfPlayers\": 2,\n\t\n\n\"maximumNumberOfPlayers\": 5\n\n\n\n\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/findGame?name=UlanBator",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"findGame"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "UlanBator"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "gameIsAlreadyInUsersCollectionException",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n\t\"name\": \"Chinczyk\",\n\t\"minimumNumberOfPlayers\": 2,\n\t\n\n\"maximumNumberOfPlayers\": 5\n\n\n\n\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/add-game-to-collection?userID=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"add-game-to-collection"
+					],
+					"query": [
+						{
+							"key": "userID",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

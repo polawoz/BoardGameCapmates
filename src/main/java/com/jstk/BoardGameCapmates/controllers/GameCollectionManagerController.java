@@ -26,22 +26,7 @@ public class GameCollectionManagerController {
 	private GameCollectionManager gameCollectionManager;
 
 
-	@RequestMapping(value = "/users-game-collection", method = RequestMethod.GET)
-	public List<GameType> findUsersGameCollection(@RequestParam("userID") long userID) throws NoUserWithThatIDException {
-
-		
-		return gameCollectionManager.findUsersGameCollection(userID);
-
-	}
-
-	@RequestMapping(value = "/add-game-to-collection", method = RequestMethod.POST)
-	public List<GameType> findUsersGameCollection(@RequestParam("userID") long userID,
-			@RequestBody GameTypeTO gameTypeTO) throws GameIsAlreadyInUsersCollectionException, NoUserWithThatIDException {
-
-		gameCollectionManager.addGameToUsersCollection(userID, gameTypeTO);
-		return gameCollectionManager.findUsersGameCollection(userID);
-
-	}
+	
 	
 	
 	@RequestMapping(value="/findGame", method=RequestMethod.GET)
@@ -54,6 +39,24 @@ public class GameCollectionManagerController {
 		return gameCollectionManager.findGamesByParameters(name, minNoPlayers, maxNoPlayers);
 	}
 
+	
+	
+	@RequestMapping(value = "/users-game-collection", method = RequestMethod.GET)
+	public List<GameType> findUsersGameCollection(@RequestParam("userID") long userID) throws NoUserWithThatIDException {
+
+		
+		return gameCollectionManager.findUsersGameCollection(userID);
+
+	}
+
+	@RequestMapping(value = "/add-game-to-collection", method = RequestMethod.POST)
+	public List<GameType> addGameToUsersGameCollection(@RequestParam("userID") long userID,
+			@RequestBody GameTypeTO gameTypeTO) throws GameIsAlreadyInUsersCollectionException, NoUserWithThatIDException {
+
+		gameCollectionManager.addGameToUsersCollection(userID, gameTypeTO);
+		return gameCollectionManager.findUsersGameCollection(userID);
+
+	}
 	
 
 	

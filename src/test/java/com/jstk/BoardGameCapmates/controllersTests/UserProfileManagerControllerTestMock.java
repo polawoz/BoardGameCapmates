@@ -8,6 +8,7 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.util.ReflectionTestUtils;
@@ -15,10 +16,12 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.jstk.BoardGameCapmates.BoardGameCapmatesApplication;
+
 import com.jstk.BoardGameCapmates.controllers.UserProfileManagerController;
 import com.jstk.BoardGameCapmates.data.ProfileInformationTO;
 import com.jstk.BoardGameCapmates.services.UserProfileManager;
@@ -65,20 +68,26 @@ public class UserProfileManagerControllerTestMock {
 				.thenReturn(usersProfileInformation);
 
 		// when
+
 		ResultActions resultActions = mockMvc.perform(get("/users-profile-information?userID=7766"));
-		
+
+		String expectedJson = convertProfileInformationTOtoJsonString(firstName, lastName, emailAddress, lifeMotto);
 
 		// then
+
+		Mockito.verify(userProfileManagerServiceMock, Mockito.times(1)).findUserProfileInformation(Mockito.anyLong());
 		resultActions.andExpect(status().isOk()).andExpect(jsonPath("firstName").value(firstName))
 				.andExpect(jsonPath("lastName").value(lastName)).andExpect(jsonPath("emailAddress").value(emailAddress))
 				.andExpect(jsonPath("lifeMotto").value(lifeMotto));
+
+		resultActions.andExpect(content().json(expectedJson, false));
+
 	}
-	
-	
+
 	@Test
-	public void shouldChangeUsersLifeMotto() throws Exception{
-		
-		//given
+	public void shouldChangeUsersLifeMotto() throws Exception {
+
+		// given
 		final String firstName = "Andrzej";
 		final String lastName = "Piaseczny";
 		final String emailAddress = "andrzej.p@skrzynka.com";
@@ -86,24 +95,31 @@ public class UserProfileManagerControllerTestMock {
 		final Long id = 7766L;
 		ProfileInformationTO usersProfileInformation = new ProfileInformationTO(firstName, lastName, emailAddress,
 				lifeMotto);
-		
-		Mockito.when(userProfileManagerServiceMock.changeLifeMotto(id, lifeMotto))
-		.thenReturn(usersProfileInformation);
-		
-		//when
-		ResultActions resultActions = mockMvc.perform(put("/change-life-motto?userID="+id+"&lifeMotto="+lifeMotto));
-		//nazwa sciezki.content()
-		
-		//then
+
+		Mockito.when(userProfileManagerServiceMock.changeLifeMotto(id, lifeMotto)).thenReturn(usersProfileInformation);
+
+		String expectedJson = convertProfileInformationTOtoJsonString(firstName, lastName, emailAddress, lifeMotto);
+
+		// when
+		ResultActions resultActions = mockMvc
+				.perform(put("/change-life-motto?userID=" + id + "&lifeMotto=" + lifeMotto));
+
+		// then
 		resultActions.andExpect(status().isOk()).andExpect(jsonPath("firstName").value(firstName))
-		.andExpect(jsonPath("lastName").value(lastName)).andExpect(jsonPath("emailAddress").value(emailAddress))
-		.andExpect(jsonPath("lifeMotto").value(lifeMotto));
-		
-		Mockito.verify(userProfileManagerServiceMock, Mockito.times(1)).changeLifeMotto(id, lifeMotto);  
-		
-		
-		
-		
+				.andExpect(jsonPath("lastName").value(lastName)).andExpect(jsonPath("emailAddress").value(emailAddress))
+				.andExpect(jsonPath("lifeMotto").value(lifeMotto));
+
+		resultActions.andExpect(content().json(expectedJson, false));
+
+		Mockito.verify(userProfileManagerServiceMock, Mockito.times(1)).changeLifeMotto(id, lifeMotto);
+
+	}
+
+	private String convertProfileInformationTOtoJsonString(String firstName, String lastName, String emailAddress,
+			String lifeMotto) {
+
+		return "{" + "\"firstName\":\"" + firstName + "\"," + "\"lastName\":\"" + lastName + "\","
+				+ "\"emailAddress\":\"" + emailAddress + "\"," + "\"lifeMotto\":\"" + lifeMotto + "\"" + "}";
 	}
 
 }

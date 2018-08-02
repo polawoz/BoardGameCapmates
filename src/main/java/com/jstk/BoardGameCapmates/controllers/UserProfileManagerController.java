@@ -2,7 +2,7 @@ package com.jstk.BoardGameCapmates.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,15 +32,7 @@ public class UserProfileManagerController {
 
 	}
 
-	// @RequestMapping(value="/users-profile-information/{id}",
-	// method=RequestMethod.GET)
-	// public ProfileInformationTO
-	// findUsersProfileInformation(@PathVariable("id") String stringUserID){
-	//
-	// Long userID = Long.valueOf(stringUserID);
-	// return userProfileManager.findUserProfileInformation(userID);
-	//
-	// }
+
 
 	@RequestMapping(value = "/change-life-motto", method = RequestMethod.PUT)
 	public @ResponseBody ProfileInformationTO changeUsersLifeMotto(@RequestParam("userID") long userID,
@@ -51,14 +43,7 @@ public class UserProfileManagerController {
 	}
 	
 	
-//	@RequestMapping(value = "/change-life-motto", method = RequestMethod.PUT)
-//	public @ResponseBody ProfileInformationTO changeUsersLifeMotto(@RequestParam("id") String stringUserID,
-//			@RequestBody String newLifeMotto) {
-//
-//		Long userID = Long.valueOf(stringUserID);
-//
-//		return userProfileManager.changeLifeMotto(userID, newLifeMotto);
-//	}
+
 	
 	
 	
